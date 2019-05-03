@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Queues
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="addNew()"><ion-icon name="add"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of queues" (click)="openQueue(item.key)">
+      <ion-label>x{{ item.key }} Очередь</ion-label>
+      <ion-note slot="end">{{ item.queue.length }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

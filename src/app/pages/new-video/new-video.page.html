@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Добавить видео</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid [formGroup]="newVideo">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Ваше имя</ion-label>
+          <ion-input formControlName="name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Сумма*</ion-label>
+          <ion-input formControlName="price"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Ютуб ссылка*</ion-label>
+          <ion-input formControlName="url"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Ваше сообщение</ion-label>
+          <ion-textarea formControlName="message"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row justify-content-center>
+      <ion-col size="auto">
+        <ion-button
+          [disabled]="newVideo.invalid"
+          [color]="newVideo.invalid ? 'danger' : 'success'">
+          Отправить
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

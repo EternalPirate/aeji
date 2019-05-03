@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="queue">
+      x{{ queueKey }} Очередь ({{ queue.length }}шт)
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of queue; let index = index">
+    <iframe [src]="'https://www.youtube.com/embed/' + item.urlId | safe: 'resourceUrl'"
+            width="100%"
+            height="180"
+            frameborder="0"
+            allowfullscreen></iframe>
+
+    <ion-card-content>
+      <ion-row justify-content-between align-items-center>
+        <ion-card-title size="auto">
+          <span *ngIf="item.name">{{ item.name }} - </span>
+          {{ item.price }} RUB
+        </ion-card-title>
+
+        <ion-button (click)="removeItem(item)" color="danger" size="small">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-row>
+
+      {{ item.message }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="onInfiniteScroll($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
