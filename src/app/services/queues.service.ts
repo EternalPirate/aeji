@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface QueuesResponse {
 	key: string;
-	queue: QueueData[];
+	queueLen: number;
 }
 
 export interface QueueData {
@@ -14,7 +16,6 @@ export interface QueueData {
 	price: number;
 	name: string;
 	createdAt: string;
-	isInHistory: boolean;
 }
 
 
@@ -30,24 +31,20 @@ export class QueuesService {
 	) {
 		this.queuesRef = db.list(this.storageKey);
 
-		// this.createQueue(
-		// 	5,
-		// 	{
-		// 		queueType: 5,
-		// 		createdAt: new Date().toString(),
-		// 		price: 500,
-		// 		isInHistory: false,
-		// 		name: 'awot',
-		// 		urlId: 'jo2s20ktQ-U',
-		// 		message: `Keep close to Nature's heart... and break clear away, once in awhile,
-		// 				and climb a mountain or spend a week in the woods. Wash your spirit clean.`
-		// 	}
-		// );
+		// this.createQueue({
+		// 	queueType: 2,
+		// 	createdAt: new Date().toString(),
+		// 	price: 500,
+		// 	name: 'awot',
+		// 	urlId: 'jo2s20ktQ-U',
+		// 	message: `Keep close to Nature's heart... and break clear away, once in awhile,
+		// 			and climb a mountain or spend a week in the woods. Wash your spirit clean.`
+		// });
 	}
 
-	createQueue(queueKey: number, queue: QueueData): void {
+	createQueue( queue: QueueData): void {
 		this.db
-			.list(`${this.storageKey}/${queueKey}`)
+			.list(`${this.storageKey}/${queue.queueType}`)
 			.push(queue);
 	}
 
@@ -61,12 +58,34 @@ export class QueuesService {
 		return this.queuesRef.remove(key);
 	}
 
-	getQueuesList(): AngularFireList<QueueData> {
-		return this.queuesRef;
+	getQueuesList(): Observable<QueuesResponse[]> {
+		return this.queuesRef
+			.snapshotChanges()
+			.pipe(
+				map(changes =>
+					changes.map(c =>
+						({
+							key: c.payload.key,
+							queueLen: Object.keys(c.payload.val()).length
+						})
+					)
+				)
+			);
 	}
 
-	getQueuesListByKey(key: string): AngularFireList<QueueData> {
+	getQueuesListById(key: string): Observable<QueueData[]> {
 		return this.db
-			.list(`${this.storageKey}/${key}`);
+			.list(`${this.storageKey}/${key}`)
+			.snapshotChanges()
+			.pipe(
+				map(changes =>
+					changes.map(c =>
+						({
+							key: c.payload.key,
+							...c.payload.val()
+						}) as QueueData
+					)
+				)
+			);
 	}
 }

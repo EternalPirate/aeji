@@ -4,7 +4,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { QueuesService, QueueData } from '../../services/queues.service';
 import { HistoryService } from '../../services/history.service';
-import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-queue-list',
@@ -12,7 +11,7 @@ import { map } from 'rxjs/operators';
 	styleUrls: ['./queue.page.scss'],
 })
 export class QueuePage implements OnInit {
-	queueKey: string;
+	queueId: string;
 	queue: QueueData[];
 
 	constructor(
@@ -24,24 +23,12 @@ export class QueuePage implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.queueKey = this.route.snapshot.params.id;
-		if (this.queueKey) {
+		this.queueId = this.route.snapshot.params.id;
+		if (this.queueId) {
 			this.dataService
-				.getQueuesListByKey(this.queueKey)
-				.snapshotChanges()
-				.pipe(
-					map(changes =>
-						changes
-							.filter(a => !a.payload.val().isInHistory)
-							.map(c =>
-							({
-								key: c.payload.key,
-								...c.payload.val()
-							})
-						)
-					)
-				)
+				.getQueuesListById(this.queueId)
 				.subscribe((queue: QueueData[]) => {
+					console.log(queue);
 					this.queue = queue;
 				});
 		}
@@ -62,7 +49,10 @@ export class QueuePage implements OnInit {
 	}
 
 	removeItem(item: QueueData): void {
-		item.isInHistory = true;
-		this.dataService.updateQueueItem(this.queueKey, item);
+		// this.dataService.updateQueueItem(this.queueId, item);
+	}
+
+	trackQueue(index, queue: QueueData) {
+		return queue ? queue.key : undefined;
 	}
 }

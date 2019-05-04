@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QueuesService, QueuesResponse } from '../../services/queues.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-queues',
@@ -18,18 +17,11 @@ export class QueuesPage implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.dataService.getQueuesList().snapshotChanges().pipe(
-			map(changes =>
-				changes.map(c =>
-					({
-						key: c.payload.key,
-						queue: Object.values(c.payload.val())
-					})
-				)
-			)
-		).subscribe((queues: QueuesResponse[]) => {
-			this.queues = queues;
-		});
+		this.dataService
+			.getQueuesList()
+			.subscribe((queues: QueuesResponse[]) => {
+				this.queues = queues;
+			});
 	}
 
 	openQueue(key: string): void {
