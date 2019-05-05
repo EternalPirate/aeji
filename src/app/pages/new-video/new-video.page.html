@@ -9,51 +9,69 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid [formGroup]="newVideo">
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Ваше имя</ion-label>
-          <ion-input formControlName="name"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+  <form [formGroup]="newVideo" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Ваше имя</ion-label>
+            <ion-input formControlName="name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Сумма*</ion-label>
-          <ion-input formControlName="price"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item [class.hasError]="newVideo.get('price').dirty && newVideo.get('price').errors">
+            <ion-label position="floating">Сумма*</ion-label>
+            <ion-input formControlName="price">
+<!--              <ng-container *ngIf="newVideo.get('price').dirty && newVideo.get('price').errors">-->
+<!--                <div *ngIf="newVideo.get('price').errors.required" class="hasError-message">-->
+<!--                  required-->
+<!--                </div>-->
+<!--                <div *ngIf="newVideo.get('price').errors.pattern" class="hasError-message">-->
+<!--                  not valid numbers-->
+<!--                </div>-->
+<!--              </ng-container>-->
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Тип очереди*</ion-label>
+            <ion-input formControlName="queueType"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Ютуб ссылка*</ion-label>
-          <ion-input formControlName="url"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Ютуб ссылка*</ion-label>
+            <ion-input formControlName="url"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Ваше сообщение</ion-label>
-          <ion-textarea formControlName="message"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Ваше сообщение</ion-label>
+            <ion-textarea formControlName="message"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-    <ion-row justify-content-center>
-      <ion-col size="auto">
-        <ion-button
-          [disabled]="newVideo.invalid"
-          [color]="newVideo.invalid ? 'danger' : 'success'">
-          Отправить
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-row justify-content-center>
+        <ion-col size="auto">
+          <ion-button
+                  type="submit"
+                  [disabled]="newVideo.invalid"
+                  [color]="newVideo.invalid ? 'danger' : 'success'">
+            Отправить
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

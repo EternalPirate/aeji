@@ -15,7 +15,7 @@ export class QueuePage implements OnInit {
 	queue: QueueData[];
 
 	constructor(
-		private dataService: QueuesService,
+		private queuesService: QueuesService,
 		private historyService: HistoryService,
 		private sanitizer: DomSanitizer,
 		private route: ActivatedRoute
@@ -25,10 +25,9 @@ export class QueuePage implements OnInit {
 	ngOnInit(): void {
 		this.queueId = this.route.snapshot.params.id;
 		if (this.queueId) {
-			this.dataService
+			this.queuesService
 				.getQueuesListById(this.queueId)
 				.subscribe((queue: QueueData[]) => {
-					console.log(queue);
 					this.queue = queue;
 				});
 		}
@@ -49,7 +48,9 @@ export class QueuePage implements OnInit {
 	}
 
 	removeItem(item: QueueData): void {
-		// this.dataService.updateQueueItem(this.queueId, item);
+		this.historyService.pushToHistory(item);
+		this.queuesService.deleteQueueByKey(item);
+		// this.queuesService.updateQueueItem(this.queueId, item);
 	}
 
 	trackQueue(index, queue: QueueData) {

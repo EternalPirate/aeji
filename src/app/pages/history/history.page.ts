@@ -15,7 +15,15 @@ export class HistoryPage implements OnInit {
 	}
 
 	ngOnInit() {
-		this.history = this.historyService.getData();
+		this.historyService
+			.getHistory()
+			.subscribe((queue: QueueData[]) => {
+				console.log(queue);
+				this.history = queue;
+			});
 	}
 
+	trackQueue(index, queue: QueueData) {
+		return queue ? queue.key : undefined;
+	}
 }
