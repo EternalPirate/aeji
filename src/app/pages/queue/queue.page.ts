@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActionSheetController } from '@ionic/angular';
+import { QueryDocumentSnapshot } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 
-import { QueuesService, QueueData } from '../../services/queues.service';
-import { HistoryService } from '../../services/history.service';
+import { QueuesService, IQueueItem, IQueuesResponse } from '../../services/queues.service';
+import { HistoryService, IHistoryItem } from '../../services/history.service';
+import { IRemoveQueueItemEvent } from '../../components/queue-video/queue-video.component';
 
 @Component({
 	selector: 'app-queue-list',
@@ -11,49 +15,140 @@ import { HistoryService } from '../../services/history.service';
 	styleUrls: ['./queue.page.scss'],
 })
 export class QueuePage implements OnInit {
-	queueId: string;
-	queue: QueueData[];
+	activeQueue: IQueuesResponse = {
+		queueType: null,
+		videoQueueLen: null
+	};
+	limit = 2;
+	queue: IQueueItem[];
+	queueSnapshot: QueryDocumentSnapshot<IQueueItem>[];
+	private cardsHeightIsChecked = false;
 
 	constructor(
 		private queuesService: QueuesService,
 		private historyService: HistoryService,
 		private sanitizer: DomSanitizer,
-		private route: ActivatedRoute
+		private router: Router,
+		private route: ActivatedRoute,
+		private r: ElementRef,
+		private actionSheetController: ActionSheetController
 	) {
 	}
 
-	ngOnInit(): void {
-		this.queueId = this.route.snapshot.params.id;
-		if (this.queueId) {
-			this.queuesService
-				.getQueuesListById(this.queueId)
-				.subscribe((queue: QueueData[]) => {
-					this.queue = queue;
-				});
+	async ngOnInit(): Promise<void> {
+		this.activeQueue.queueType = this.route.snapshot.params.id;
+
+		if (this.activeQueue.queueType) {
+			const docs: QueryDocumentSnapshot<any>[] = (await this.queuesService
+				.getQueueById(this.activeQueue.queueType, this.limit)
+				.toPromise())
+				.docs;
+
+			this.queueSnapshot = docs;
+			this.queue = docs.map(item => item.data());
+
+			this.checkInitHeight();
+		}
+	}
+
+	async removeItem(e: IRemoveQueueItemEvent): Promise<void> {
+		const remEl = e.event.target as HTMLElement;
+		remEl.classList.add('on-removing');
+
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Точно удалить?',
+			buttons: [{
+				text: 'Да',
+				role: 'destructive',
+				icon: 'trash',
+				handler: () => {
+					const removedSnapshot = this.queueSnapshot.splice(e.index, 1)[0];
+					const removed: IHistoryItem = {
+						...this.queue.splice(e.index, 1)[0],
+						date_removed: firebase.firestore.FieldValue.serverTimestamp()
+					};
+
+					this.historyService.pushToHistory(removed);
+					this.queuesService.deleteQueueItem(this.activeQueue.queueType, removedSnapshot);
+
+					this.checkInitHeight();
+
+					remEl.classList.remove('on-removing');
+				}
+			}, {
+				text: 'Отмена',
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					remEl.classList.remove('on-removing');
+				}
+			}]
+		});
+		await actionSheet.present();
+	}
+
+	onLastVideoLoad(): void {
+		// onLastVideoLoad need to checkInitHeight
+		if (!this.cardsHeightIsChecked) {
+			this.checkInitHeight();
+		}
+	}
+
+	checkInitHeight(): void {
+		setTimeout(() => {
+			const cards = this.r.nativeElement.querySelector('#cards');
+			const wp = cards.closest('ion-content');
+
+			if (cards && cards.clientHeight < wp.clientHeight) {
+				// if cards height less than screen we need to load more
+				this.loadMore();
+				this.cardsHeightIsChecked = true;
+			}
+		});
+	}
+
+	async onRefresh(event): Promise<void> {
+		const fromFirstSnapshot = this.queueSnapshot[0];
+		const toVisibleLength = this.queueSnapshot.length;
+
+		const docs: QueryDocumentSnapshot<any>[] = (await this.queuesService
+			.getQueueByIdFromTo(this.activeQueue.queueType, fromFirstSnapshot, toVisibleLength, true)
+			.toPromise())
+			.docs;
+
+		if (docs.length > 0) {
+			this.queueSnapshot = docs;
+			this.queue = docs.map(item => item.data());
+		}
+
+		event.target.complete();
+	}
+
+	async loadMore(): Promise<void> {
+		const lastSnapshot = this.queueSnapshot[this.queueSnapshot.length - 1];
+
+		if (lastSnapshot) {
+			const docs: QueryDocumentSnapshot<any>[] = (await this.queuesService
+				.getQueueByIdFromTo(this.activeQueue.queueType, lastSnapshot, this.limit)
+				.toPromise())
+				.docs;
+
+			if (docs.length > 0) {
+				this.queueSnapshot = this.queueSnapshot.concat(...docs);
+				this.queue = this.queue.concat(...docs.map(item => item.data()));
+			}
 		}
 	}
 
 	onInfiniteScroll(event): void {
-		// setTimeout(() => {
-		// 	this.videos.push(...this.queue.videos.splice(0, this.loadStep));
-		//
-		// 	event.target.complete();
-		//
-		// 	// App logic to determine if all data is loaded
-		// 	// and disable the infinite scroll
-		// 	if (this.queue.videos.length <= this.loadStep) {
-		// 		event.target.disabled = true;
-		// 	}
-		// }, 500);
+		setTimeout(() => {
+			this.loadMore();
+
+			event.target.complete();
+		}, 500);
 	}
 
-	removeItem(item: QueueData): void {
-		this.historyService.pushToHistory(item);
-		this.queuesService.deleteQueueByKey(item);
-		// this.queuesService.updateQueueItem(this.queueId, item);
-	}
-
-	trackQueue(index, queue: QueueData) {
+	trackQueue(index, queue: IQueueItem) {
 		return queue ? queue.key : undefined;
 	}
 }

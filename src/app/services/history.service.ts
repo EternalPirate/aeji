@@ -1,30 +1,60 @@
 import { Injectable } from '@angular/core';
-import { QueueData } from './queues.service';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { convertQueueList } from './services-utils';
+
+import { IQueueItem } from './queues.service';
+
+export interface IHistoryItem extends IQueueItem {
+	date_removed: firebase.firestore.FieldValue;
+}
 
 @Injectable({
 	providedIn: 'root'
 })
 export class HistoryService {
 	private storageKey = 'history';
-	private readonly historyRef: AngularFireList<QueueData> = null;
-	// private history: QueueData[] = [];
+	private db: AngularFirestoreCollection<IHistoryItem>;
 
 	constructor(
-		private db: AngularFireDatabase
+		private angularFirestore: AngularFirestore
 	) {
-		this.historyRef = db.list(this.storageKey);
-		// this.storage.set(this.storageKey, this.history);
+		this.db = this.angularFirestore.collection(this.storageKey);
 	}
 
-	pushToHistory(queue: QueueData) {
-		this.historyRef.push(queue);
+	pushToHistory(item: IHistoryItem) {
+		this.db.add(item);
 	}
 
-	getHistory(): Observable<QueueData[]> {
-		return convertQueueList(this.historyRef
-			.snapshotChanges());
+	getHistory(limit: number): Observable<firebase.firestore.QuerySnapshot> {
+		return this.angularFirestore
+			.collection(this.storageKey, ref => ref
+				.orderBy('date_removed', 'desc')
+				.limit(limit)
+			)
+			.get();
+	}
+
+	getHistoryFromTo(
+		startSnapshot: QueryDocumentSnapshot<IHistoryItem>,
+		limit: number,
+		includeFirst?: boolean
+	): Observable<firebase.firestore.QuerySnapshot> {
+		if (includeFirst) {
+			return this.angularFirestore
+				.collection(this.storageKey, ref => ref
+					.orderBy('date_removed', 'desc')
+					.startAt(startSnapshot)
+					.limit(limit)
+				)
+				.get();
+		} else {
+			return this.angularFirestore
+				.collection(this.storageKey, ref => ref
+					.orderBy('date_removed', 'desc')
+					.startAfter(startSnapshot)
+					.limit(limit)
+				)
+				.get();
+		}
 	}
 }

@@ -1,24 +1,32 @@
-import { map } from 'rxjs/operators';
-import { QueueData } from './queues.service';
-import { Observable } from 'rxjs';
+import { IQueueItem } from './queues.service';
 
-export function convertQueueList(observable: Observable<any>): Observable<QueueData[]> {
-	return observable
-		.pipe(
-			map(changes =>
-				// convert from object of objects to array of objects
-				changes
-					.map(c => ({
-						key: c.payload.key,
-						...c.payload.val()
-					}) as QueueData)
-					// sort in time order, first should be last added
-					.sort((a, b) => {
-						const aTime = Number(new Date(a.createdAt));
-						const bTime = Number(new Date(b.createdAt));
+export function convertQueueList(queuesObj: { [key: string]: IQueueItem }): IQueueItem[] {
+	return Object.keys(queuesObj).map(itemKey => {
+		return {
+			key: itemKey,
+			...queuesObj[itemKey]
+		};
+	});
+}
 
-						return bTime - aTime;
-					})
-			)
-		);
+export function convertQueues(queuesObj: { [key: string]: IQueueItem }): { queueLen: number; key: string }[] {
+	return Object.keys(queuesObj).map(itemKey => {
+		return {
+			key: itemKey,
+			queueLen: Object.keys(queuesObj[itemKey]).length
+		};
+	});
+}
+
+export function getQueryStringParams(url): any {
+	const params = {};
+	const parser = document.createElement('a');
+	parser.href = url;
+	const query = parser.search.substring(1);
+	const vars = query.split('&');
+	for (const key of vars) {
+		const pair = key.split('=');
+		params[pair[0]] = decodeURIComponent(pair[1]);
+	}
+	return params;
 }

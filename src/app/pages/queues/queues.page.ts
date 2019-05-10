@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QueuesService, QueuesResponse } from '../../services/queues.service';
 import { Router } from '@angular/router';
+
+import { QueuesService, IQueuesResponse } from '../../services/queues.service';
 
 @Component({
 	selector: 'app-queues',
@@ -8,27 +9,23 @@ import { Router } from '@angular/router';
 	styleUrls: ['queues.page.scss'],
 })
 export class QueuesPage implements OnInit {
-	queues: QueuesResponse[];
+	queues: IQueuesResponse[];
 
 	constructor(
-		private dataService: QueuesService,
+		private queuesService: QueuesService,
 		private router: Router
 	) {
 	}
 
 	ngOnInit(): void {
-		this.dataService
-			.getQueuesList()
-			.subscribe((queues: QueuesResponse[]) => {
+		this.queuesService
+			.getQueues()
+			.subscribe((queues: IQueuesResponse[]) => {
 				this.queues = queues;
 			});
 	}
 
-	openQueue(key: string): void {
-		this.router.navigate(['queue', key]);
-	}
-
-	addNew(): void {
-		this.router.navigate(['new-video']);
+	openQueue(queue: IQueuesResponse): void {
+		this.router.navigate(['queue', queue.queueType]);
 	}
 }

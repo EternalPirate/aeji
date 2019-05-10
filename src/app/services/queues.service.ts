@@ -1,67 +1,104 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { convertQueueList } from './services-utils';
+import * as firebase from 'firebase/app';
 
-export interface QueuesResponse {
-	key: string;
-	queueLen: number;
+export interface IQueuesResponse {
+	queueType: string;
+	videoQueueLen: number;
 }
 
-export interface QueueData {
+export interface IQueueItem {
 	key?: string;
-	queueType: number;
-	url: string;
 	message: string;
-	price: number;
-	name: string;
-	createdAt: string;
+	username: string;
+	amount: number;
+	currency: string;
+	date_created: string;
+	url: string;
+	queueType: string;
 }
-
 
 @Injectable({
 	providedIn: 'root'
 })
 export class QueuesService {
 	private storageKey = 'queues';
-	private readonly queuesRef: AngularFireList<QueueData> = null;
+	private storageCollectionKey = 'videoQueue';
+	private db: AngularFirestoreCollection<IQueueItem>;
 
 	constructor(
-		private db: AngularFireDatabase
+		private angularFirestore: AngularFirestore,
 	) {
-		this.queuesRef = db.list(this.storageKey);
+		this.db = this.angularFirestore.collection(this.storageKey);
 	}
 
-	createQueue(queue: QueueData): void {
-		this.db
-			.list(`${this.storageKey}/${queue.queueType}`)
-			.push(queue);
+	createQueue(queueItem: IQueueItem): void {
+		const queueType = queueItem.queueType;
+		const queueRef = this.db.doc(queueType);
+		const increment = firebase.firestore.FieldValue.increment(1);
+
+		// push to collection new queueItem
+		queueRef.collection(this.storageCollectionKey).add(queueItem);
+		// create an empty document, or do nothing if it exists.
+		queueRef.set({}, { merge: true });
+		// increment videoQueueLen
+		queueRef.update({
+			videoQueueLen: increment,
+			queueType
+		});
 	}
 
-	deleteQueueByKey(queue: QueueData): void {
-		this.db
-			.list(`${this.storageKey}/${queue.queueType}`)
-			.remove(queue.key);
+	deleteQueueItem(docId: string, snapshot: QueryDocumentSnapshot<IQueueItem>): void {
+		snapshot.ref.delete();
+
+		const queueRef = this.db.doc(docId);
+		const decrement = firebase.firestore.FieldValue.increment(-1);
+		// decrement videoQueueLen
+		queueRef.update({
+			videoQueueLen: decrement
+		});
 	}
 
-	getQueuesList(): Observable<QueuesResponse[]> {
-		return this.queuesRef
-			.snapshotChanges()
-			.pipe(
-				map(changes =>
-					changes
-						.map(c => ({
-							key: c.payload.key,
-							queueLen: Object.keys(c.payload.val()).length
-						}))
+	getQueues(): Observable<any[]> {
+		return this.db
+			.valueChanges();
+	}
+
+	getQueueById(id: string, limit: number): Observable<firebase.firestore.QuerySnapshot> {
+		return this.db
+			.doc(id)
+			.collection(this.storageCollectionKey, ref => ref
+				.orderBy('date_created')
+				.limit(limit)
+			)
+			.get();
+	}
+
+	getQueueByIdFromTo(
+		id: string,
+		startSnapshot: QueryDocumentSnapshot<IQueueItem>,
+		limit: number,
+		includeFirst?: boolean
+	): Observable<firebase.firestore.QuerySnapshot> {
+		if (includeFirst) {
+			return this.db
+				.doc(id)
+				.collection(this.storageCollectionKey, ref => ref
+					.orderBy('date_created')
+					.startAt(startSnapshot)
+					.limit(limit)
 				)
-			);
-	}
-
-	getQueuesListById(key: string): Observable<QueueData[]> {
-		return convertQueueList(this.db
-			.list(`${this.storageKey}/${key}`)
-			.snapshotChanges());
+				.get();
+		} else {
+			return this.db
+				.doc(id)
+				.collection(this.storageCollectionKey, ref => ref
+					.orderBy('date_created')
+					.startAfter(startSnapshot)
+					.limit(limit)
+				)
+				.get();
+		}
 	}
 }

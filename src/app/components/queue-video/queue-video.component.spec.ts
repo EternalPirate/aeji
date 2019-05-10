@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewVideoPage } from './new-video.page';
+import { QueueVideoComponent } from './queue-video.component';
 
-describe('NewVideoPage', () => {
-  let component: NewVideoPage;
-  let fixture: ComponentFixture<NewVideoPage>;
+describe('QueueVideoComponent', () => {
+  let component: QueueVideoComponent;
+  let fixture: ComponentFixture<QueueVideoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewVideoPage ],
+      declarations: [ QueueVideoComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewVideoPage);
+    fixture = TestBed.createComponent(QueueVideoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

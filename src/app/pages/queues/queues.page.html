@@ -7,18 +7,17 @@
     <ion-title>
       Очереди
     </ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button (click)="addNew()"><ion-icon name="add"></ion-icon></ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of queues" (click)="openQueue(item.key)">
-      <ion-label>x{{ item.key }} Очередь</ion-label>
-      <ion-note slot="end">({{ item.queueLen }}шт.)</ion-note>
+  <ion-list *ngIf="queues">
+    <ion-item *ngFor="let item of queues" (click)="openQueue(item)">
+      <ion-label>{{ item.queueType }} Очередь</ion-label>
+      <ion-note slot="end">({{ item.videoQueueLen }}шт.)</ion-note>
     </ion-item>
   </ion-list>
+
+
+  <h2 *ngIf="!queues" text-center>Пустовато</h2>
 </ion-content>
