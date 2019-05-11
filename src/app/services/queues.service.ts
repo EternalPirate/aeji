@@ -33,22 +33,6 @@ export class QueuesService {
 		this.db = this.angularFirestore.collection(this.storageKey);
 	}
 
-	createQueue(queueItem: IQueueItem): void {
-		const queueType = queueItem.queueType;
-		const queueRef = this.db.doc(queueType);
-		const increment = firebase.firestore.FieldValue.increment(1);
-
-		// push to collection new queueItem
-		queueRef.collection(this.storageCollectionKey).add(queueItem);
-		// create an empty document, or do nothing if it exists.
-		queueRef.set({}, { merge: true });
-		// increment videoQueueLen
-		queueRef.update({
-			videoQueueLen: increment,
-			queueType
-		});
-	}
-
 	deleteQueueItem(docId: string, snapshot: QueryDocumentSnapshot<IQueueItem>): void {
 		snapshot.ref.delete();
 
