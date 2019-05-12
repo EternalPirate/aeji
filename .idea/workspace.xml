@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c188269c-a2e1-414f-b175-fa657183c3e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.firebase/hosting.d3d3.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.d3d3.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/history/history.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/history/history.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/history/history.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/history/history.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/queues.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/queues.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/common.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/common.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/common.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages-history-history-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-history-history-module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages-history-history-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-history-history-module.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages-queue-queue-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-queue-queue-module.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/pages-queue-queue-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-queue-queue-module.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -31,21 +17,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-560">
-              <caret line="25" column="55" lean-forward="true" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+            <state relative-caret-position="240">
+              <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
                 <element signature="e#391#482#0" expanded="true" />
-                <element signature="n#!!block;n#ngOnInit#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#onLastVideoLoad#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#checkInitHeight#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#onRefresh#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#loadMore#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#onInfiniteScroll#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#trackQueue#0;n#QueuePage#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,7 +96,6 @@
         <option value="$PROJECT_DIR$/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/src/app/pages/new-video/new-video.page.ts" />
         <option value="$PROJECT_DIR$/src/app/models/donation-alerts.models.ts" />
-        <option value="$PROJECT_DIR$/src/app/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/src/app/services/services-utils.ts" />
         <option value="$PROJECT_DIR$/src/app/shared.module.ts" />
         <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.scss" />
@@ -110,7 +106,6 @@
         <option value="$PROJECT_DIR$/src/app/services/history.service.ts" />
         <option value="$PROJECT_DIR$/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/app/pages/queues/queues.page.ts" />
         <option value="$PROJECT_DIR$/src/app/services/queues.service.ts" />
         <option value="$PROJECT_DIR$/src/app/pages/history/history.page.html" />
@@ -120,6 +115,8 @@
         <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss" />
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/app/app-routing.module.ts" />
       </list>
     </option>
   </component>
@@ -223,12 +220,12 @@
       <workItem from="1557476597870" duration="17123000" />
       <workItem from="1557512161932" duration="1222000" />
       <workItem from="1557563502356" duration="16537000" />
-      <workItem from="1557641874738" duration="1929000" />
+      <workItem from="1557641874738" duration="2735000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124830000" />
+    <option name="totallyTimeSpent" value="125636000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="373" y="0" width="1554" height="1057" extended-state="0" />
@@ -236,10 +233,10 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.19525066" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19525066" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.27380952" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.27380952" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50078124" side_tool="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
@@ -329,16 +326,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-697">
           <caret line="438" column="16" selection-start-line="438" selection-start-column="16" selection-end-line="438" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,13 +1016,6 @@
     <entry file="file://$PROJECT_DIR$/angular.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/services/history.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
@@ -1155,20 +1135,36 @@
     <entry file="file://$PROJECT_DIR$/src/polyfills.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-560">
-          <caret line="25" column="55" lean-forward="true" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+        <state relative-caret-position="240">
+          <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
             <element signature="e#391#482#0" expanded="true" />
-            <element signature="n#!!block;n#ngOnInit#0;n#QueuePage#0" />
             <element signature="n#!!block;n#onLastVideoLoad#0;n#QueuePage#0" />
             <element signature="n#!!block;n#checkInitHeight#0;n#QueuePage#0" />
             <element signature="n#!!block;n#onRefresh#0;n#QueuePage#0" />
             <element signature="n#!!block;n#loadMore#0;n#QueuePage#0" />
             <element signature="n#!!block;n#onInfiniteScroll#0;n#QueuePage#0" />
             <element signature="n#!!block;n#trackQueue#0;n#QueuePage#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
