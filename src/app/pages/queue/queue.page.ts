@@ -1,11 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActionSheetController } from '@ionic/angular';
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { trigger, transition, style, animate, query, stagger, animateChild } from '@angular/animations';
 import * as firebase from 'firebase/app';
-// import * as html2canvas from 'html2canvas';
-
 
 import { QueuesService, IQueueItem, IQueuesResponse } from '../../services/queues.service';
 import { HistoryService, IHistoryItem } from '../../services/history.service';
@@ -15,6 +14,30 @@ import { IRemoveQueueItemEvent } from '../../components/queue-video/queue-video.
 	selector: 'app-queue-list',
 	templateUrl: './queue.page.html',
 	styleUrls: ['./queue.page.scss'],
+	animations: [
+		// nice stagger effect when showing existing elements
+		trigger('list', [
+			transition(':enter', [
+				// child animation selector + stagger
+				query('@items',
+					stagger(300, animateChild())
+				)
+			]),
+		]),
+		trigger('items', [
+			// cubic-bezier for a tiny bouncing feel
+			transition(':enter', [
+				style({ transform: 'scale(0.5)', opacity: 0 }),
+				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+					style({ transform: 'scale(1)', opacity: 1 }))
+			]),
+			transition(':leave', [
+				style({ transform: 'scale(1)', opacity: 1, height: '*' }),
+				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
+					style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+			]),
+		])
+	]
 })
 export class QueuePage implements OnInit {
 	activeQueue: IQueuesResponse = {
@@ -24,6 +47,7 @@ export class QueuePage implements OnInit {
 	limit = 2;
 	queue: IQueueItem[];
 	queueSnapshot: QueryDocumentSnapshot<IQueueItem>[];
+	loaded = false;
 	private cardsHeightIsChecked = false;
 
 	constructor(
@@ -37,41 +61,35 @@ export class QueuePage implements OnInit {
 	) {
 	}
 
-	async ngOnInit(): Promise<void> {
+	ngOnInit(): void {
 		this.activeQueue.queueType = this.route.snapshot.params.id;
 
 		if (this.activeQueue.queueType) {
-			const {collection, info} = this.queuesService.getQueueById(this.activeQueue.queueType, this.limit);
-			const docs: QueryDocumentSnapshot<any>[] = (await collection.toPromise()).docs;
-
-			// get snapshot and values
-			// snapshot need for lazyloading and removing items
-			this.queueSnapshot = docs;
-			this.queue = docs.map(item => item.data());
+			this.initLoad();
 
 			// check for queue change
-			info.subscribe((activeQueue: IQueuesResponse) => {
+			this.queuesService
+				.getQueueByIdSub(this.activeQueue.queueType, this.limit)
+				.subscribe((activeQueue: IQueuesResponse) => {
 				this.activeQueue = activeQueue;
+				this.checkInitHeight();
 			});
 
-			this.checkInitHeight();
+			this.loaded = true;
 		}
 	}
 
+	async initLoad(): Promise<void> {
+		const collection = this.queuesService.getQueueListById(this.activeQueue.queueType, this.limit);
+		const docs: QueryDocumentSnapshot<any>[] = (await collection.toPromise()).docs;
+
+		// get snapshot and values
+		// snapshot need for lazyloading and removing items
+		this.queueSnapshot = docs;
+		this.queue = docs.map(item => item.data());
+	}
+
 	async removeItem(e: IRemoveQueueItemEvent): Promise<void> {
-		// const appQueueVideo = e.event.target.closest('app-queue-video');
-		// console.log([appQueueVideo]);
-		// html2canvas(appQueueVideo).then((canvas) => {
-		// 	const ctx = canvas.getContext('2d');
-		// 	const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-		// 	const pixelArr = imageData.data;
-		// 	console.log(canvas);
-		// 	document.body.appendChild(canvas);
-		// }).catch(() => {
-		// 	// avoid Angular ngZone error
-		// });
-
-
 		const remEl = e.event.target as HTMLElement;
 		remEl.classList.add('on-removing');
 
@@ -90,8 +108,6 @@ export class QueuePage implements OnInit {
 
 					this.historyService.pushToHistory(removed);
 					this.queuesService.deleteQueueItem(this.activeQueue.queueType, removedSnapshot);
-
-					this.checkInitHeight();
 
 					remEl.classList.remove('on-removing');
 				}
@@ -126,26 +142,11 @@ export class QueuePage implements OnInit {
 					this.loadMore();
 					this.cardsHeightIsChecked = true;
 				}
+			} else {
+				// in case if we have no cards but just added one more
+				this.initLoad();
 			}
 		});
-	}
-
-	async onRefresh(event): Promise<void> {
-		const fromFirstSnapshot = this.queueSnapshot[0];
-
-		if (fromFirstSnapshot) {
-			const toVisibleLength = this.queueSnapshot.length;
-
-			const docs: QueryDocumentSnapshot<any>[] = (await this.queuesService
-				.getQueueByIdFromTo(this.activeQueue.queueType, fromFirstSnapshot, toVisibleLength, true)
-				.toPromise())
-				.docs;
-
-			this.queueSnapshot = docs;
-			this.queue = docs.map(item => item.data());
-		}
-
-		event.target.complete();
 	}
 
 	async loadMore(): Promise<void> {
@@ -173,6 +174,6 @@ export class QueuePage implements OnInit {
 	}
 
 	trackQueue(index, queue: IQueueItem) {
-		return queue ? queue.key : undefined;
+		return queue ? queue.id : undefined;
 	}
 }

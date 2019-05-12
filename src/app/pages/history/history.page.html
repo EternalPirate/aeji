@@ -7,21 +7,17 @@
 
     <ion-title>
       История
-      <span *ngIf="historyLen">({{ historyLen }}шт.)</span>
+      <span *ngIf="history?.length > 0">({{ history.length }}шт.)</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-refresher (ionRefresh)="onRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-
   <div *ngIf="history?.length > 0">
-    <div id="cards">
+    <div @list id="cards">
       <app-queue-video
+              @items
               *ngFor="let item of history; trackBy: trackQueue"
               [queueItem]="item"
               [isHistory]="true">

@@ -11,13 +11,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="queues">
-    <ion-item *ngFor="let item of queues" (click)="openQueue(item)">
-      <ion-label>{{ item.queueType }} Очередь</ion-label>
-      <ion-note slot="end">({{ item.videoQueueLen }}шт.)</ion-note>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="loaded">
+    <ion-list *ngIf="queuesNotEmpty" @list>
+      <ion-item
+              @items
+              *ngFor="let item of queues; trackBy: trackQueue"
+              [hidden]="item.videoQueueLen === 0"
+              (click)="openQueue(item)">
+        <ion-label>{{ item.queueType }} Очередь</ion-label>
+        <ion-note slot="end">({{ item.videoQueueLen }}шт.)</ion-note>
+      </ion-item>
+    </ion-list>
+
+    <h2 *ngIf="!queuesNotEmpty" text-center>Пустовато</h2>
+  </div>
 
 
-  <h2 *ngIf="!queues" text-center>Пустовато</h2>
+  <h2 *ngIf="!loaded" text-center>
+    ...загрузка
+  </h2>
 </ion-content>

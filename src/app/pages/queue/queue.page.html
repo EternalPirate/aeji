@@ -14,31 +14,34 @@
 
 
 <ion-content>
-    <ion-refresher (ionRefresh)="onRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+    <div *ngIf="loaded">
+        <div *ngIf="queue?.length > 0">
+            <div @list id="cards">
+                <app-queue-video
+                        @items
+                        *ngFor="let queueItem of queue; let last = last; let index = index; trackBy: trackQueue"
+                        [queueItem]="queueItem"
+                        [last]="last"
+                        [index]="index"
+                        (removeItem)="removeItem($event)"
+                        (lastVideoLoad)="onLastVideoLoad()">
+                </app-queue-video>
+            </div>
 
-    <div *ngIf="queue?.length > 0">
-        <div id="cards">
-            <app-queue-video
-                    *ngFor="let queueItem of queue; let last = last; let index = index; trackBy: trackQueue"
-                    [queueItem]="queueItem"
-                    [last]="last"
-                    [index]="index"
-                    (removeItem)="removeItem($event)"
-                    (lastVideoLoad)="onLastVideoLoad()">
-            </app-queue-video>
+
+            <ion-infinite-scroll threshold="5px" (ionInfinite)="onInfiniteScroll($event)">
+                <ion-infinite-scroll-content
+                        loadingSpinner="bubbles"
+                        loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
         </div>
 
-
-        <ion-infinite-scroll threshold="5px" (ionInfinite)="onInfiniteScroll($event)">
-            <ion-infinite-scroll-content
-                    loadingSpinner="bubbles"
-                    loadingText="Loading more data...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+        <h2 *ngIf="queue?.length === 0" text-center>Пустовато</h2>
     </div>
 
 
-    <h2 *ngIf="queue?.length === 0" text-center>Пустовато</h2>
+    <h2 *ngIf="!loaded" text-center>
+        ...загрузка
+    </h2>
 </ion-content>

@@ -9,7 +9,7 @@ export interface IQueuesResponse {
 }
 
 export interface IQueueItem {
-	key?: string;
+	id: string;
 	message: string;
 	username: string;
 	amount: number;
@@ -17,11 +17,6 @@ export interface IQueueItem {
 	date_created: string;
 	url: string;
 	queueType: string;
-}
-
-export interface IQueueByIdResponse {
-	collection: Observable<firebase.firestore.QuerySnapshot>;
-	info: Observable<{}>;
 }
 
 @Injectable({
@@ -54,17 +49,18 @@ export class QueuesService {
 			.valueChanges();
 	}
 
-	getQueueById(id: string, limit: number): IQueueByIdResponse {
-		return {
-			collection: this.db
-				.doc(id)
-				.collection(this.storageCollectionKey, ref => ref
-					.orderBy('date_created')
-					.limit(limit)
-				)
-				.get(),
-			info: this.db.doc(id).valueChanges()
-		};
+	getQueueListById(id: string, limit: number): Observable<firebase.firestore.QuerySnapshot> {
+		return this.db
+			.doc(id)
+			.collection(this.storageCollectionKey, ref => ref
+				.orderBy('date_created')
+				.limit(limit)
+			)
+			.get();
+	}
+
+	getQueueByIdSub(id: string, limit: number): Observable<{}> {
+		return this.db.doc(id).valueChanges();
 	}
 
 	getQueueByIdFromTo(

@@ -25,13 +25,22 @@ export class HistoryService {
 		this.db.add(item);
 	}
 
-	getHistory(limit: number): Observable<firebase.firestore.QuerySnapshot> {
+	getHistoryList(limit: number): Observable<firebase.firestore.QuerySnapshot> {
 		return this.angularFirestore
 			.collection(this.storageKey, ref => ref
 				.orderBy('date_removed', 'desc')
 				.limit(limit)
 			)
 			.get();
+	}
+
+	getHistorySub(limit: number): Observable<IHistoryItem[]> {
+		return this.angularFirestore
+			.collection(this.storageKey, ref => ref
+				.orderBy('date_removed', 'desc')
+				.limit(limit)
+			)
+			.valueChanges();
 	}
 
 	getHistoryFromTo(

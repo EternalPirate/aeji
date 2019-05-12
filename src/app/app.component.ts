@@ -11,7 +11,7 @@ export class AppComponent {
 	appPages = [
 		{
 			title: 'Очереди',
-			url: '/queues',
+			url: '/',
 			icon: 'home'
 		},
 		{

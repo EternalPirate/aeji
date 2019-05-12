@@ -3,13 +3,51 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-toolbar-background: #212121;
+  --ion-toolbar-color: #dbdbdb;
+  --ion-background-color: #242424;
+  --ion-item-border-color: #545454;
+  --ion-item-color: #dbdbdb;
+  --ion-text-color: #d1d1d1;
+  --ion-item-background-activated: #3e3e3e;
+
+  //--ion-background-color	Background color of entire app
+  //--ion-background-color-rgb	Background color of entire app, rgb format
+  //--ion-text-color	Text color of entire app
+  //--ion-text-color-rgb	Text color of entire app, rgb format
+  //--ion-backdrop-color	Color of the Backdrop component
+  //--ion-overlay-background-color	Background color of the overlays
+  //--ion-border-color	Border color
+  //--ion-box-shadow-color	Box shadow color
+  //--ion-tab-bar-background	Background of the Tab bar
+  //--ion-tab-bar-background-focused	Background of the focused Tab bar
+  //--ion-tab-bar-border-color	Border color of the Tab bar
+  //--ion-tab-bar-color	Color of the Tab bar
+  //--ion-tab-bar-color-activated	Color of the activated Tab
+  //--ion-toolbar-background	Background of the Toolbar
+  //--ion-toolbar-border-color	Border color of the Toolbar
+  //--ion-toolbar-color	Color of the components in the Toolbar
+  //--ion-toolbar-color-activated	Color of the activated components in the Toolbar
+  //--ion-toolbar-color-unchecked	Color of the unchecked components in the Toolbar
+  //--ion-toolbar-color-checked	Color of the checked components in the Toolbar
+  //--ion-item-background	Background of the Item
+  //--ion-item-background-activated	Background of the activated Item
+  //--ion-item-border-color-	Border color of the Item
+  //--ion-item-color	Color of the components in the Item
+  //--ion-placeholder-color	Color of the placeholder in inputs
+
+
+
+
+
+
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary: #f4f5f8;
+  --ion-color-primary-rgb: 244, 244, 244;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #d7d8da;
+  --ion-color-primary-tint: #f5f6f9;
 
   /** secondary **/
   --ion-color-secondary: #0cd1e8;
@@ -44,12 +82,12 @@
   --ion-color-warning-tint: #ffd31a;
 
   /** danger **/
-  --ion-color-danger: #f04141;
+  --ion-color-danger: #ce3838;
   --ion-color-danger-rgb: 245, 61, 61;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #d33939;
-  --ion-color-danger-tint: #f25454;
+  --ion-color-danger-shade: #bb3232;
+  --ion-color-danger-tint: #b53e3e;
 
   /** dark **/
   --ion-color-dark: #222428;
@@ -74,4 +112,24 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+}
+
+ion-card {
+  --ion-color-step-600: #cbcbcb;
+  --ion-item-background: #353535;
+}
+
+ion-card-title, ion-card-content, ion-card-subtitle {
+  --color: #cbcbcb;
+  color: var(--color);
+}
+
+
+.action-sheet-group {
+  --color: #cbcbcb;
+  --background: #353535;
+}
+
+.action-sheet-button.activated {
+  --background-activated: #545454;
 }

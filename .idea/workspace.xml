@@ -3,6 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="c188269c-a2e1-414f-b175-fa657183c3e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/history/history.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/history/history.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/history/history.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/history/history.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/queues/queues.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queues/queues.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/history.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/history.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/queues.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/queues.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme/variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme/variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web.config" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -19,14 +34,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+            <state relative-caret-position="-576">
+              <caret column="9" selection-start-column="9" selection-end-column="9" />
               <folding>
-                <element signature="e#0#62#0" expanded="true" />
-                <element signature="e#391#482#0" expanded="true" />
+                <element signature="n#!!block;n#initLoad#0;n#QueuePage#0" />
+                <element signature="n#!!block;n#removeItem#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#onLastVideoLoad#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#checkInitHeight#0;n#QueuePage#0" />
-                <element signature="n#!!block;n#onRefresh#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#loadMore#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#onInfiniteScroll#0;n#QueuePage#0" />
                 <element signature="n#!!block;n#trackQueue#0;n#QueuePage#0" />
@@ -35,23 +49,47 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+            <state relative-caret-position="384">
+              <caret line="44" selection-start-line="44" selection-end-line="45" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#ion-content#0;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.html">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="28" />
+              <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -60,9 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>child</find>
-      <find>URL</find>
-      <find>dPoll</find>
       <find>onInfiniteScroll</find>
       <find>QueuesService</find>
       <find>AngularFireDatabase</find>
@@ -72,12 +107,27 @@
       <find>el:</find>
       <find>last</find>
       <find>page</find>
-      <find>cardsHeightIsChecked</find>
       <find>increment</find>
       <find>date_removed</find>
       <find>activeQueue</find>
       <find>name</find>
       <find>router</find>
+      <find>document.createElement('img');</find>
+      <find>tempCtx</find>
+      <find>integer</find>
+      <find>easing</find>
+      <find>jquery</find>
+      <find>weighted</find>
+      <find>activeBreakpoint</find>
+      <find>init</find>
+      <find>Particle</find>
+      <find>--ion-color-secondary-contrast</find>
+      <find>--background</find>
+      <find>--ion-tab-bar-background</find>
+      <find>--ion-toolbar-background</find>
+      <find>353535</find>
+      <find>cardsHeightIsChecked</find>
+      <find>historyLen</find>
     </findStrings>
     <dirStrings>
       <dir>D:\PROJECTS\aeji\node_modules\@angular\fire</dir>
@@ -97,31 +147,36 @@
         <option value="$PROJECT_DIR$/src/app/models/donation-alerts.models.ts" />
         <option value="$PROJECT_DIR$/src/app/services/services-utils.ts" />
         <option value="$PROJECT_DIR$/src/app/shared.module.ts" />
-        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.scss" />
         <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" />
-        <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.html" />
-        <option value="$PROJECT_DIR$/src/app/services/history.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/app.component.ts" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/app/pages/queues/queues.page.ts" />
-        <option value="$PROJECT_DIR$/src/app/services/queues.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/pages/history/history.page.html" />
-        <option value="$PROJECT_DIR$/src/app/pages/history/history.page.ts" />
-        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" />
         <option value="$PROJECT_DIR$/src/app/pages/history/history.page.scss" />
-        <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss" />
-        <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/web.config" />
         <option value="$PROJECT_DIR$/src/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/src/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/utils/dust-animation.ts" />
+        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/node_modules/animejs/lib/anime.js" />
+        <option value="$PROJECT_DIR$/angular.json" />
+        <option value="$PROJECT_DIR$/src/app/app.module.ts" />
+        <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss" />
+        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.scss" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.html" />
+        <option value="$PROJECT_DIR$/src/theme/variables.scss" />
+        <option value="$PROJECT_DIR$/src/app/services/queues.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/services/history.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/pages/history/history.page.html" />
+        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.ts" />
+        <option value="$PROJECT_DIR$/src/app/pages/queue/queue.page.html" />
+        <option value="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" />
+        <option value="$PROJECT_DIR$/src/app/pages/queues/queues.page.ts" />
+        <option value="$PROJECT_DIR$/src/app/pages/history/history.page.ts" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="373" />
-    <option name="width" value="1554" />
+    <option name="x" value="427" />
+    <option name="width" value="1500" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectView">
@@ -153,15 +208,7 @@
               <item name="aeji" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aeji" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aeji" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="queue-video" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="aeji" type="b2602c69:ProjectViewProjectNode" />
@@ -169,6 +216,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="history" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aeji" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aeji" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -220,23 +274,23 @@
       <workItem from="1557512161932" duration="1222000" />
       <workItem from="1557563502356" duration="16537000" />
       <workItem from="1557641874738" duration="2880000" />
-      <workItem from="1557671571541" duration="285000" />
+      <workItem from="1557671571541" duration="25953000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126066000" />
+    <option name="totallyTimeSpent" value="151734000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="373" y="0" width="1554" height="1057" extended-state="0" />
+    <frame x="427" y="0" width="1500" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.19525066" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19904241" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.27380952" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" weight="0.267316" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50078124" side_tool="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
@@ -251,84 +305,32 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info id="npm" order="1" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19945168" />
+      <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.267316" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50078124" side_tool="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="TypeScript" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32900432" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.32900432" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/database/interfaces.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="6" column="75" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/new-video/new-video.page.html" />
-    <entry file="file://$PROJECT_DIR$/src/app/pages/new-video/new-video.page.ts" />
-    <entry file="file://$PROJECT_DIR$/src/app/models/donation-alerts.models.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/firestore/firestore.module.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/auth/auth.module.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/storage/storage.module.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/firebase/LICENSE" />
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/firebase/package.json" />
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/firebase/README.md" />
-    <entry file="file://$PROJECT_DIR$/ionic.starter.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/firebase.app.module.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@ionic/angular/dist/directives/proxies.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="105" column="16" selection-start-line="105" selection-start-column="16" selection-end-line="105" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/embed.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-697">
-          <caret line="438" column="16" selection-start-line="438" selection-start-column="16" selection-end-line="438" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@angular/router/src/router.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-321">
@@ -346,9 +348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -361,16 +360,6 @@
     <entry file="file://$PROJECT_DIR$/node_modules/firebase/empty-import.d.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/firestore/interfaces.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
@@ -382,34 +371,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="17" column="73" selection-start-line="17" selection-start-column="73" selection-end-line="17" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/firestore/collection/collection.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="1353" column="5" selection-start-line="1353" selection-start-column="5" selection-end-line="1353" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1006,36 +967,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="72" column="3" selection-start-line="72" selection-start-column="3" selection-end-line="72" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/angular.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/services/history.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es2015.core.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1043,85 +974,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/services/queues.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="56" column="16" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <element signature="n#!!block;n#deleteQueueItem#0;n#QueuesService#0" />
-            <element signature="n#!!block;n#getQueues#0;n#QueuesService#0" />
-            <element signature="n#!!block;n#getQueueByIdFromTo#0;n#QueuesService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-            <element signature="n#!!block;n#loadMore#0;n#HistoryPage#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="4" column="9" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.scss">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-          <folding>
-            <element signature="e#23#42#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="6064" column="10" selection-start-line="6064" selection-start-column="10" selection-end-line="6064" selection-end-column="10" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@types/html2canvas/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1135,16 +994,616 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="16" lean-forward="true" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/html2canvas/dist/html2canvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="231" column="1445" selection-start-line="231" selection-start-column="1415" selection-end-line="231" selection-end-column="1445" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/html-to-image/lib/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="32" column="32" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2337">
+          <caret line="4657" column="10" selection-start-line="4657" selection-start-column="10" selection-end-line="4657" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/utils/dust-animation.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/chance/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1024">
+          <caret line="169" column="16" selection-start-line="169" selection-start-column="8" selection-end-line="169" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/particlesjs/dist/particles.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/animejs/lib/anime.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/particlesjs/dist/particles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="e#248#272#0" />
+            <element signature="e#405#610#0" />
+            <element signature="e#428#452#0" />
+            <element signature="e#475#498#0" />
+            <element signature="e#521#545#0" />
+            <element signature="e#568#591#0" />
+            <element signature="e#614#674#0" />
+            <element signature="e#764#1011#0" />
+            <element signature="e#1299#1420#0" />
+            <element signature="e#1466#1813#0" />
+            <element signature="e#1818#1887#0" />
+            <element signature="e#1928#2137#0" />
+            <element signature="e#2142#2201#0" />
+            <element signature="e#2252#3476#0" />
+            <element signature="e#2338#2486#0" />
+            <element signature="e#3150#3212#0" />
+            <element signature="e#3218#3359#0" />
+            <element signature="e#3481#3540#0" />
+            <element signature="e#3591#3730#0" />
+            <element signature="e#3735#3801#0" />
+            <element signature="e#3853#4010#0" />
+            <element signature="e#3941#4006#0" />
+            <element signature="e#4015#4107#0" />
+            <element signature="e#4161#5023#0" />
+            <element signature="e#4374#5019#0" />
+            <element signature="e#4420#4940#0" />
+            <element signature="e#4590#4932#0" />
+            <element signature="e#4616#4780#0" />
+            <element signature="e#4693#4750#0" />
+            <element signature="e#4982#5011#0" />
+            <element signature="e#5028#5127#0" />
+            <element signature="e#5177#6026#0" />
+            <element signature="e#5362#6022#0" />
+            <element signature="e#5435#5636#0" />
+            <element signature="e#5490#5628#0" />
+            <element signature="e#5547#5618#0" />
+            <element signature="e#5674#5812#0" />
+            <element signature="e#5818#6016#0" />
+            <element signature="e#5860#6008#0" />
+            <element signature="e#6031#6107#0" />
+            <element signature="e#6149#6216#0" />
+            <element signature="e#6221#6296#0" />
+            <element signature="e#6337#6965#0" />
+            <element signature="e#6566#6628#0" />
+            <element signature="e#6634#6775#0" />
+            <element signature="e#6900#6955#0" />
+            <element signature="e#6970#7061#0" />
+            <element signature="e#7103#7198#0" />
+            <element signature="e#7203#7289#0" />
+            <element signature="e#7338#7413#0" />
+            <element signature="e#7382#7409#0" />
+            <element signature="e#7418#7487#0" />
+            <element signature="e#7535#7893#0" />
+            <element signature="e#7579#7600#0" />
+            <element signature="e#7627#7675#0" />
+            <element signature="e#7681#7863#0" />
+            <element signature="e#7898#7959#0" />
+            <element signature="e#8410#8458#0" />
+            <element signature="e#8588#8753#0" />
+            <element signature="e#8649#8684#0" />
+            <element signature="e#8791#8863#0" />
+            <element signature="e#8872#8924#0" />
+            <element signature="e#8970#9600#0" />
+            <element signature="e#9198#9596#0" />
+            <element signature="e#9277#9590#0" />
+            <element signature="e#9443#9471#0" />
+            <element signature="e#9510#9582#0" />
+            <element signature="e#9605#9753#0" />
+            <element signature="e#9811#10414#0" />
+            <element signature="e#10419#10537#0" />
+            <element signature="e#10589#10697#0" />
+            <element signature="e#10634#10671#0" />
+            <element signature="e#10702#10821#0" />
+            <element signature="e#10866#11081#0" />
+            <element signature="e#10961#11069#0" />
+            <element signature="e#11086#11211#0" />
+            <element signature="e#11252#12121#0" />
+            <element signature="e#11759#11809#0" />
+            <element signature="e#11815#11936#0" />
+            <element signature="e#12126#12209#0" />
+            <element signature="e#12250#12526#0" />
+            <element signature="e#12531#12653#0" />
+            <element signature="e#12732#13114#0" />
+            <element signature="e#12868#12893#0" />
+            <element signature="e#12918#12957#0" />
+            <element signature="e#12993#13018#0" />
+            <element signature="e#13043#13083#0" />
+            <element signature="e#13119#13195#0" />
+            <element signature="e#13236#13589#0" />
+            <element signature="e#13419#13462#0" />
+            <element signature="e#13524#13584#0" />
+            <element signature="e#13653#13928#0" />
+            <element signature="e#13721#13786#0" />
+            <element signature="e#13844#13881#0" />
+            <element signature="e#13887#13926#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/animejs/lib/anime.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="1296" lean-forward="true" selection-start-line="1296" selection-end-line="1297" selection-end-column="17" />
+          <folding>
+            <element signature="e#161#387#0" />
+            <element signature="e#417#511#0" />
+            <element signature="e#728#756#0" />
+            <element signature="e#800#847#0" />
+            <element signature="e#884#920#0" />
+            <element signature="e#958#994#0" />
+            <element signature="e#1005#1979#0" />
+            <element signature="e#2033#2165#0" />
+            <element signature="e#2329#3748#0" />
+            <element signature="e#2914#3258#0" />
+            <element signature="e#2991#3110#0" />
+            <element signature="e#3116#3187#0" />
+            <element signature="e#3285#3702#0" />
+            <element signature="e#3438#3596#0" />
+            <element signature="e#3497#3557#0" />
+            <element signature="e#3563#3590#0" />
+            <element signature="e#3860#4208#0" />
+            <element signature="e#4039#4206#0" />
+            <element signature="e#4343#4456#0" />
+            <element signature="e#4538#7045#0" />
+            <element signature="e#5048#5338#0" />
+            <element signature="e#5092#5261#0" />
+            <element signature="e#5395#5665#0" />
+            <element signature="e#5429#5641#0" />
+            <element signature="e#5705#7024#0" />
+            <element signature="e#5873#6008#0" />
+            <element signature="e#5924#6002#0" />
+            <element signature="e#6036#6842#0" />
+            <element signature="e#6240#6291#0" />
+            <element signature="e#6588#6659#0" />
+            <element signature="e#6691#6726#0" />
+            <element signature="e#6732#6835#0" />
+            <element signature="e#6868#7019#0" />
+            <element signature="e#7077#9084#0" />
+            <element signature="e#7257#8812#0" />
+            <element signature="e#7267#7699#0" />
+            <element signature="e#7305#7317#0" />
+            <element signature="e#7354#7367#0" />
+            <element signature="e#7404#7417#0" />
+            <element signature="e#7454#7467#0" />
+            <element signature="e#7504#7516#0" />
+            <element signature="e#7553#7565#0" />
+            <element signature="e#7602#7614#0" />
+            <element signature="e#7651#7663#0" />
+            <element signature="e#7678#7693#0" />
+            <element signature="e#7710#8221#0" />
+            <element signature="e#7748#7761#0" />
+            <element signature="e#7798#7812#0" />
+            <element signature="e#7849#7863#0" />
+            <element signature="e#7900#7914#0" />
+            <element signature="e#7951#7964#0" />
+            <element signature="e#8001#8014#0" />
+            <element signature="e#8051#8064#0" />
+            <element signature="e#8101#8114#0" />
+            <element signature="e#8199#8215#0" />
+            <element signature="e#8234#8808#0" />
+            <element signature="e#8272#8287#0" />
+            <element signature="e#8324#8340#0" />
+            <element signature="e#8377#8393#0" />
+            <element signature="e#8430#8446#0" />
+            <element signature="e#8483#8498#0" />
+            <element signature="e#8535#8550#0" />
+            <element signature="e#8587#8602#0" />
+            <element signature="e#8639#8654#0" />
+            <element signature="e#8784#8802#0" />
+            <element signature="e#8829#8876#0" />
+            <element signature="e#8912#9017#0" />
+            <element signature="e#8960#9011#0" />
+            <element signature="e#9130#9567#0" />
+            <element signature="e#9281#9565#0" />
+            <element signature="e#9301#9349#0" />
+            <element signature="e#9354#9411#0" />
+            <element signature="e#9416#9466#0" />
+            <element signature="e#9471#9561#0" />
+            <element signature="e#9608#9716#0" />
+            <element signature="e#9616#9687#0" />
+            <element signature="e#9697#9714#0" />
+            <element signature="e#9765#10062#0" />
+            <element signature="e#9905#10043#0" />
+            <element signature="e#9925#10039#0" />
+            <element signature="e#9998#10033#0" />
+            <element signature="e#10091#10190#0" />
+            <element signature="e#10212#10396#0" />
+            <element signature="e#10431#10489#0" />
+            <element signature="e#10527#10604#0" />
+            <element signature="e#10642#10753#0" />
+            <element signature="e#10785#10889#0" />
+            <element signature="e#10931#11052#0" />
+            <element signature="e#11083#11442#0" />
+            <element signature="e#11473#12308#0" />
+            <element signature="e#11783#11993#0" />
+            <element signature="e#12023#12047#0" />
+            <element signature="e#12053#12222#0" />
+            <element signature="e#12335#12476#0" />
+            <element signature="e#12510#12658#0" />
+            <element signature="e#12696#12887#0" />
+            <element signature="e#12943#13048#0" />
+            <element signature="e#13082#13117#0" />
+            <element signature="e#13161#13836#0" />
+            <element signature="e#13875#14151#0" />
+            <element signature="e#13901#14149#0" />
+            <element signature="e#14189#14519#0" />
+            <element signature="e#14555#14779#0" />
+            <element signature="e#14840#15183#0" />
+            <element signature="e#15019#15123#0" />
+            <element signature="e#15253#15556#0" />
+            <element signature="e#15257#15554#0" />
+            <element signature="e#15307#15386#0" />
+            <element signature="e#15391#15446#0" />
+            <element signature="e#15451#15507#0" />
+            <element signature="e#15512#15550#0" />
+            <element signature="e#15594#15907#0" />
+            <element signature="e#15780#15905#0" />
+            <element signature="e#15810#15837#0" />
+            <element signature="e#15842#15869#0" />
+            <element signature="e#15874#15901#0" />
+            <element signature="e#15943#16179#0" />
+            <element signature="e#16181#16263#0" />
+            <element signature="e#16365#16441#0" />
+            <element signature="e#16472#16521#0" />
+            <element signature="e#16550#16630#0" />
+            <element signature="e#16659#16809#0" />
+            <element signature="e#16842#17133#0" />
+            <element signature="e#16962#17109#0" />
+            <element signature="e#17165#17301#0" />
+            <element signature="e#17350#17684#0" />
+            <element signature="e#17411#17682#0" />
+            <element signature="e#17450#17492#0" />
+            <element signature="e#17497#17535#0" />
+            <element signature="e#17540#17578#0" />
+            <element signature="e#17583#17629#0" />
+            <element signature="e#17634#17678#0" />
+            <element signature="e#17713#17827#0" />
+            <element signature="e#17873#18045#0" />
+            <element signature="e#17934#18024#0" />
+            <element signature="e#18086#18585#0" />
+            <element signature="e#18435#18583#0" />
+            <element signature="e#18619#18892#0" />
+            <element signature="e#18735#18890#0" />
+            <element signature="e#18748#18886#0" />
+            <element signature="e#18935#19417#0" />
+            <element signature="e#18962#19109#0" />
+            <element signature="e#19220#19415#0" />
+            <element signature="e#19249#19288#0" />
+            <element signature="e#19293#19332#0" />
+            <element signature="e#19337#19411#0" />
+            <element signature="e#19474#19747#0" />
+            <element signature="e#19592#19745#0" />
+            <element signature="e#19796#20013#0" />
+            <element signature="e#20048#20234#0" />
+            <element signature="e#20124#20230#0" />
+            <element signature="e#20305#21414#0" />
+            <element signature="e#20505#20868#0" />
+            <element signature="e#20601#20753#0" />
+            <element signature="e#20759#20864#0" />
+            <element signature="e#20956#21354#0" />
+            <element signature="e#21454#22143#0" />
+            <element signature="e#21733#22058#0" />
+            <element signature="e#21828#22052#0" />
+            <element signature="e#21878#22025#0" />
+            <element signature="e#21903#21970#0" />
+            <element signature="e#21976#22017#0" />
+            <element signature="e#22191#22529#0" />
+            <element signature="e#22357#22506#0" />
+            <element signature="e#22378#22502#0" />
+            <element signature="e#22402#22494#0" />
+            <element signature="e#22591#22961#0" />
+            <element signature="e#22630#22875#0" />
+            <element signature="e#22711#22853#0" />
+            <element signature="e#23006#24126#0" />
+            <element signature="e#23067#24122#0" />
+            <element signature="e#24170#24626#0" />
+            <element signature="e#24395#24624#0" />
+            <element signature="e#24469#24620#0" />
+            <element signature="e#24696#25350#0" />
+            <element signature="e#24787#25346#0" />
+            <element signature="e#24826#25342#0" />
+            <element signature="e#25410#25815#0" />
+            <element signature="e#25493#25813#0" />
+            <element signature="e#25605#25809#0" />
+            <element signature="e#25865#26087#0" />
+            <element signature="e#25939#26044#0" />
+            <element signature="e#25983#26038#0" />
+            <element signature="e#26164#26844#0" />
+            <element signature="e#26902#27550#0" />
+            <element signature="e#27364#27546#0" />
+            <element signature="e#27649#28378#0" />
+            <element signature="e#27669#27714#0" />
+            <element signature="e#27734#28361#0" />
+            <element signature="e#27823#28305#0" />
+            <element signature="e#27882#28285#0" />
+            <element signature="e#27969#28014#0" />
+            <element signature="e#28020#28264#0" />
+            <element signature="e#28127#28254#0" />
+            <element signature="e#28311#28357#0" />
+            <element signature="e#28418#28672#0" />
+            <element signature="e#28443#28591#0" />
+            <element signature="e#28597#28670#0" />
+            <element signature="e#28711#28787#0" />
+            <element signature="e#28832#36275#0" />
+            <element signature="e#29012#29171#0" />
+            <element signature="e#29294#29587#0" />
+            <element signature="e#29371#29452#0" />
+            <element signature="e#29617#29686#0" />
+            <element signature="e#29711#29804#0" />
+            <element signature="e#29839#29904#0" />
+            <element signature="e#29944#30165#0" />
+            <element signature="e#29981#30068#0" />
+            <element signature="e#30074#30161#0" />
+            <element signature="e#30209#32288#0" />
+            <element signature="e#30347#32284#0" />
+            <element signature="e#31101#31595#0" />
+            <element signature="e#31257#31334#0" />
+            <element signature="e#31340#31417#0" />
+            <element signature="e#31437#31558#0" />
+            <element signature="e#31480#31548#0" />
+            <element signature="e#31717#31757#0" />
+            <element signature="e#31763#32129#0" />
+            <element signature="e#31844#32121#0" />
+            <element signature="e#31969#32111#0" />
+            <element signature="e#31991#32043#0" />
+            <element signature="e#32049#32099#0" />
+            <element signature="e#32317#32397#0" />
+            <element signature="e#32427#32527#0" />
+            <element signature="e#32488#32523#0" />
+            <element signature="e#32572#34543#0" />
+            <element signature="e#32987#33083#0" />
+            <element signature="e#33143#33182#0" />
+            <element signature="e#33273#33322#0" />
+            <element signature="e#33376#33608#0" />
+            <element signature="e#33411#33535#0" />
+            <element signature="e#33614#33781#0" />
+            <element signature="e#33648#33775#0" />
+            <element signature="e#33928#34539#0" />
+            <element signature="e#34004#34188#0" />
+            <element signature="e#34194#34533#0" />
+            <element signature="e#34261#34525#0" />
+            <element signature="e#34434#34515#0" />
+            <element signature="e#34575#35306#0" />
+            <element signature="e#35379#35447#0" />
+            <element signature="e#35480#35610#0" />
+            <element signature="e#35646#35694#0" />
+            <element signature="e#35727#35777#0" />
+            <element signature="e#35809#36012#0" />
+            <element signature="e#36047#36100#0" />
+            <element signature="e#36135#36183#0" />
+            <element signature="e#36374#36532#0" />
+            <element signature="e#36416#36530#0" />
+            <element signature="e#36488#36526#0" />
+            <element signature="e#36566#37191#0" />
+            <element signature="e#36657#37189#0" />
+            <element signature="e#36877#37115#0" />
+            <element signature="e#37243#39215#0" />
+            <element signature="e#37924#39213#0" />
+            <element signature="e#38078#39073#0" />
+            <element signature="e#38126#38812#0" />
+            <element signature="e#38147#38210#0" />
+            <element signature="e#38216#38755#0" />
+            <element signature="e#39256#40453#0" />
+            <element signature="e#39396#40437#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/angular.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="192" column="3" selection-start-line="192" selection-start-column="3" selection-end-line="192" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!block;n#projects#0;n#!!top" />
+            <element signature="n#!!block;n#architect#0;n#!!block;n#app#0;n#!!block;n#projects#0;n#!!top" />
+            <element signature="n#!!block;n#app-e2e#0;n#!!block;n#projects#0;n#!!top" />
+            <element signature="n#!!block;n#cli#0;n#!!top" />
+            <element signature="n#!!block;n#schematics#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="75" column="3" selection-start-line="75" selection-start-column="3" selection-end-line="75" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@ionic/angular/dist/directives/proxies.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-750">
+          <caret line="151" column="21" selection-start-line="151" selection-start-column="21" selection-end-line="151" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/queue-video/queue-video.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/theme/variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="132" column="30" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/queues.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="62" column="45" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+            <element signature="n#!!block;n#deleteQueueItem#0;n#QueuesService#0" />
+            <element signature="n#!!block;n#getQueues#0;n#QueuesService#0" />
+            <element signature="n#!!block;n#getQueueByIdFromTo#0;n#QueuesService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@angular/fire/firestore/collection/collection.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/history.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="36" column="57" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@angular/animations/src/animation_metadata.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-133">
+          <caret line="591" column="24" selection-start-line="591" selection-start-column="24" selection-end-line="591" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="44" selection-start-line="44" selection-end-line="45" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#ion-content#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        <state relative-caret-position="-576">
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
           <folding>
-            <element signature="e#0#62#0" expanded="true" />
-            <element signature="e#391#482#0" expanded="true" />
+            <element signature="n#!!block;n#initLoad#0;n#QueuePage#0" />
+            <element signature="n#!!block;n#removeItem#0;n#QueuePage#0" />
             <element signature="n#!!block;n#onLastVideoLoad#0;n#QueuePage#0" />
             <element signature="n#!!block;n#checkInitHeight#0;n#QueuePage#0" />
-            <element signature="n#!!block;n#onRefresh#0;n#QueuePage#0" />
             <element signature="n#!!block;n#loadMore#0;n#QueuePage#0" />
             <element signature="n#!!block;n#onInfiniteScroll#0;n#QueuePage#0" />
             <element signature="n#!!block;n#trackQueue#0;n#QueuePage#0" />
@@ -1152,19 +1611,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.html">
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="299">
+          <caret line="1231" column="4" selection-start-line="1231" selection-start-column="4" selection-end-line="1231" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+        <state relative-caret-position="400">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/pages/history/history.page.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
