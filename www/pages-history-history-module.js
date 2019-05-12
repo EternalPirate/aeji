@@ -52,7 +52,7 @@ var HistoryPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n\r\n\r\n    <ion-title>\r\n      История\r\n      <span *ngIf=\"historyLen\">({{ historyLen }}шт.)</span>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n\r\n  <div *ngIf=\"history\">\r\n    <div id=\"cards\">\r\n      <app-queue-video\r\n              *ngFor=\"let item of history; trackBy: trackQueue\"\r\n              [queueItem]=\"item\"\r\n              [isHistory]=\"true\">\r\n      </app-queue-video>\r\n    </div>\r\n\r\n    <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n      <ion-infinite-scroll-content\r\n              loadingSpinner=\"bubbles\"\r\n              loadingText=\"Loading more data...\">\r\n      </ion-infinite-scroll-content>\r\n    </ion-infinite-scroll>\r\n  </div>\r\n\r\n\r\n  <h2 *ngIf=\"!history\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n\r\n\r\n    <ion-title>\r\n      История\r\n      <span *ngIf=\"historyLen\">({{ historyLen }}шт.)</span>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n\r\n  <div *ngIf=\"history?.length > 0\">\r\n    <div id=\"cards\">\r\n      <app-queue-video\r\n              *ngFor=\"let item of history; trackBy: trackQueue\"\r\n              [queueItem]=\"item\"\r\n              [isHistory]=\"true\">\r\n      </app-queue-video>\r\n    </div>\r\n\r\n    <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n      <ion-infinite-scroll-content\r\n              loadingSpinner=\"bubbles\"\r\n              loadingText=\"Loading more data...\">\r\n      </ion-infinite-scroll-content>\r\n    </ion-infinite-scroll>\r\n  </div>\r\n\r\n\r\n  <h2 *ngIf=\"history?.length === 0\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -113,11 +113,13 @@ var HistoryPage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
-            var wp = cards.closest('ion-content');
-            if (cards && cards.clientHeight < wp.clientHeight) {
-                // if cards height less than screen we need to load more
-                _this.loadMore();
-                _this.cardsHeightIsChecked = true;
+            if (cards) {
+                var wp = cards.closest('ion-content');
+                if (cards && cards.clientHeight < wp.clientHeight) {
+                    // if cards height less than screen we need to load more
+                    _this.loadMore();
+                    _this.cardsHeightIsChecked = true;
+                }
             }
         });
     };
@@ -135,10 +137,8 @@ var HistoryPage = /** @class */ (function () {
                     case 1:
                         docs = (_c.sent())
                             .docs;
-                        if (docs.length > 0) {
-                            this.historySnapshot = (_a = this.historySnapshot).concat.apply(_a, docs);
-                            this.history = (_b = this.history).concat.apply(_b, docs.map(function (item) { return item.data(); }));
-                        }
+                        this.historySnapshot = docs ? (_a = this.historySnapshot).concat.apply(_a, docs) : null;
+                        this.history = docs ? (_b = this.history).concat.apply(_b, docs.map(function (item) { return item.data(); })) : null;
                         _c.label = 2;
                     case 2: return [2 /*return*/];
                 }
@@ -152,6 +152,7 @@ var HistoryPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         fromFirstSnapshot = this.historySnapshot[0];
+                        if (!fromFirstSnapshot) return [3 /*break*/, 2];
                         toVisibleLength = this.historySnapshot.length;
                         return [4 /*yield*/, this.historyService
                                 .getHistoryFromTo(fromFirstSnapshot, toVisibleLength, true)
@@ -159,10 +160,10 @@ var HistoryPage = /** @class */ (function () {
                     case 1:
                         docs = (_a.sent())
                             .docs;
-                        if (docs.length > 0) {
-                            this.historySnapshot = docs;
-                            this.history = docs.map(function (item) { return item.data(); });
-                        }
+                        this.historySnapshot = docs;
+                        this.history = docs.map(function (item) { return item.data(); });
+                        _a.label = 2;
+                    case 2:
                         event.target.complete();
                         return [2 /*return*/];
                 }

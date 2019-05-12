@@ -37,12 +37,15 @@ export class HistoryPage implements OnInit {
 	checkInitHeight(): void {
 		setTimeout(() => {
 			const cards = this.r.nativeElement.querySelector('#cards');
-			const wp = cards.closest('ion-content');
 
-			if (cards && cards.clientHeight < wp.clientHeight) {
-				// if cards height less than screen we need to load more
-				this.loadMore();
-				this.cardsHeightIsChecked = true;
+			if (cards) {
+				const wp = cards.closest('ion-content');
+
+				if (cards && cards.clientHeight < wp.clientHeight) {
+					// if cards height less than screen we need to load more
+					this.loadMore();
+					this.cardsHeightIsChecked = true;
+				}
 			}
 		});
 	}
@@ -56,23 +59,22 @@ export class HistoryPage implements OnInit {
 				.toPromise())
 				.docs;
 
-			if (docs.length > 0) {
-				this.historySnapshot = this.historySnapshot.concat(...docs);
-				this.history = this.history.concat(...docs.map(item => item.data()));
-			}
+			this.historySnapshot = docs ? this.historySnapshot.concat(...docs) : null;
+			this.history = docs ? this.history.concat(...docs.map(item => item.data())) : null;
 		}
 	}
 
 	async onRefresh(event): Promise<void> {
 		const fromFirstSnapshot = this.historySnapshot[0];
-		const toVisibleLength = this.historySnapshot.length;
 
-		const docs: QueryDocumentSnapshot<any>[] = (await this.historyService
-			.getHistoryFromTo(fromFirstSnapshot, toVisibleLength, true)
-			.toPromise())
-			.docs;
+		if (fromFirstSnapshot) {
+			const toVisibleLength = this.historySnapshot.length;
 
-		if (docs.length > 0) {
+			const docs: QueryDocumentSnapshot<any>[] = (await this.historyService
+				.getHistoryFromTo(fromFirstSnapshot, toVisibleLength, true)
+				.toPromise())
+				.docs;
+
 			this.historySnapshot = docs;
 			this.history = docs.map(item => item.data());
 		}

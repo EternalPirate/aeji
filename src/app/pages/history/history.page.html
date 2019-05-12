@@ -19,7 +19,7 @@
   </ion-refresher>
 
 
-  <div *ngIf="history">
+  <div *ngIf="history?.length > 0">
     <div id="cards">
       <app-queue-video
               *ngFor="let item of history; trackBy: trackQueue"
@@ -37,5 +37,5 @@
   </div>
 
 
-  <h2 *ngIf="!history" text-center>Пустовато</h2>
+  <h2 *ngIf="history?.length === 0" text-center>Пустовато</h2>
 </ion-content>

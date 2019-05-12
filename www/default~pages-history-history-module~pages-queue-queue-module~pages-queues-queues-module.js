@@ -787,7 +787,7 @@ module.exports = "<ion-card #card>\n  <iframe [src]=\"queueItem.url | safe: 'res
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-button.on-removing {\n  opacity: 0.2; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9xdWV1ZS12aWRlby9EOlxcUFJPSkVDVFNcXGFlamkvc3JjXFxhcHBcXGNvbXBvbmVudHNcXHF1ZXVlLXZpZGVvXFxxdWV1ZS12aWRlby5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcXVldWUtdmlkZW8vcXVldWUtdmlkZW8uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tYnV0dG9uLm9uLXJlbW92aW5nIHtcclxuICBvcGFjaXR5OiAwLjI7XHJcbn1cclxuIl19 */"
+module.exports = ":host {\n  display: block; }\n\nion-button.on-removing {\n  opacity: 0.2; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9xdWV1ZS12aWRlby9EOlxcUFJPSkVDVFNcXGFlamkvc3JjXFxhcHBcXGNvbXBvbmVudHNcXHF1ZXVlLXZpZGVvXFxxdWV1ZS12aWRlby5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQWMsRUFBQTs7QUFHaEI7RUFDRSxZQUFZLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3F1ZXVlLXZpZGVvL3F1ZXVlLXZpZGVvLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG59XHJcblxyXG5pb24tYnV0dG9uLm9uLXJlbW92aW5nIHtcclxuICBvcGFjaXR5OiAwLjI7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 

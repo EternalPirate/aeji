@@ -19,6 +19,11 @@ export interface IQueueItem {
 	queueType: string;
 }
 
+export interface IQueueByIdResponse {
+	collection: Observable<firebase.firestore.QuerySnapshot>;
+	info: Observable<{}>;
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -28,7 +33,7 @@ export class QueuesService {
 	private db: AngularFirestoreCollection<IQueueItem>;
 
 	constructor(
-		private angularFirestore: AngularFirestore,
+		private angularFirestore: AngularFirestore
 	) {
 		this.db = this.angularFirestore.collection(this.storageKey);
 	}
@@ -49,14 +54,17 @@ export class QueuesService {
 			.valueChanges();
 	}
 
-	getQueueById(id: string, limit: number): Observable<firebase.firestore.QuerySnapshot> {
-		return this.db
-			.doc(id)
-			.collection(this.storageCollectionKey, ref => ref
-				.orderBy('date_created')
-				.limit(limit)
-			)
-			.get();
+	getQueueById(id: string, limit: number): IQueueByIdResponse {
+		return {
+			collection: this.db
+				.doc(id)
+				.collection(this.storageCollectionKey, ref => ref
+					.orderBy('date_created')
+					.limit(limit)
+				)
+				.get(),
+			info: this.db.doc(id).valueChanges()
+		};
 	}
 
 	getQueueByIdFromTo(

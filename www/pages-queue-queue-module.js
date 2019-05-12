@@ -52,7 +52,7 @@ var QueuePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button></ion-back-button>\r\n        </ion-buttons>\r\n\r\n        <ion-title *ngIf=\"activeQueue\">\r\n            {{ activeQueue.queueType }}\r\n            Очередь\r\n            <span *ngIf=\"activeQueue.videoQueueLen\">({{ activeQueue.videoQueueLen }}шт.)</span>\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n    <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <div *ngIf=\"queue\">\r\n        <div id=\"cards\">\r\n            <app-queue-video\r\n                    *ngFor=\"let queueItem of queue; let last = last; let index = index; trackBy: trackQueue\"\r\n                    [queueItem]=\"queueItem\"\r\n                    [last]=\"last\"\r\n                    [index]=\"index\"\r\n                    (removeItem)=\"removeItem($event)\"\r\n                    (lastVideoLoad)=\"onLastVideoLoad()\">\r\n            </app-queue-video>\r\n        </div>\r\n\r\n\r\n        <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n            <ion-infinite-scroll-content\r\n                    loadingSpinner=\"bubbles\"\r\n                    loadingText=\"Loading more data...\">\r\n            </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n    </div>\r\n\r\n\r\n    <h2 *ngIf=\"!queue\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button></ion-back-button>\r\n        </ion-buttons>\r\n\r\n        <ion-title *ngIf=\"activeQueue\">\r\n            {{ activeQueue.queueType }}\r\n            Очередь\r\n            <span *ngIf=\"activeQueue.videoQueueLen\">({{ activeQueue.videoQueueLen }}шт.)</span>\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n    <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <div *ngIf=\"queue?.length > 0\">\r\n        <div id=\"cards\">\r\n            <app-queue-video\r\n                    *ngFor=\"let queueItem of queue; let last = last; let index = index; trackBy: trackQueue\"\r\n                    [queueItem]=\"queueItem\"\r\n                    [last]=\"last\"\r\n                    [index]=\"index\"\r\n                    (removeItem)=\"removeItem($event)\"\r\n                    (lastVideoLoad)=\"onLastVideoLoad()\">\r\n            </app-queue-video>\r\n        </div>\r\n\r\n\r\n        <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n            <ion-infinite-scroll-content\r\n                    loadingSpinner=\"bubbles\"\r\n                    loadingText=\"Loading more data...\">\r\n            </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n    </div>\r\n\r\n\r\n    <h2 *ngIf=\"queue?.length === 0\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -92,6 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import * as html2canvas from 'html2canvas';
 
 
 var QueuePage = /** @class */ (function () {
@@ -112,22 +113,27 @@ var QueuePage = /** @class */ (function () {
     }
     QueuePage.prototype.ngOnInit = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var docs;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
+            var _a, collection, info, docs;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         this.activeQueue.queueType = this.route.snapshot.params.id;
                         if (!this.activeQueue.queueType) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.queuesService
-                                .getQueueById(this.activeQueue.queueType, this.limit)
-                                .toPromise()];
+                        _a = this.queuesService.getQueueById(this.activeQueue.queueType, this.limit), collection = _a.collection, info = _a.info;
+                        return [4 /*yield*/, collection.toPromise()];
                     case 1:
-                        docs = (_a.sent())
-                            .docs;
+                        docs = (_b.sent()).docs;
+                        // get snapshot and values
+                        // snapshot need for lazyloading and removing items
                         this.queueSnapshot = docs;
                         this.queue = docs.map(function (item) { return item.data(); });
+                        // check for queue change
+                        info.subscribe(function (activeQueue) {
+                            _this.activeQueue = activeQueue;
+                        });
                         this.checkInitHeight();
-                        _a.label = 2;
+                        _b.label = 2;
                     case 2: return [2 /*return*/];
                 }
             });
@@ -185,11 +191,13 @@ var QueuePage = /** @class */ (function () {
         var _this = this;
         setTimeout(function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
-            var wp = cards.closest('ion-content');
-            if (cards && cards.clientHeight < wp.clientHeight) {
-                // if cards height less than screen we need to load more
-                _this.loadMore();
-                _this.cardsHeightIsChecked = true;
+            if (cards) {
+                var wp = cards.closest('ion-content');
+                if (cards && cards.clientHeight < wp.clientHeight) {
+                    // if cards height less than screen we need to load more
+                    _this.loadMore();
+                    _this.cardsHeightIsChecked = true;
+                }
             }
         });
     };
@@ -200,6 +208,7 @@ var QueuePage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         fromFirstSnapshot = this.queueSnapshot[0];
+                        if (!fromFirstSnapshot) return [3 /*break*/, 2];
                         toVisibleLength = this.queueSnapshot.length;
                         return [4 /*yield*/, this.queuesService
                                 .getQueueByIdFromTo(this.activeQueue.queueType, fromFirstSnapshot, toVisibleLength, true)
@@ -207,10 +216,10 @@ var QueuePage = /** @class */ (function () {
                     case 1:
                         docs = (_a.sent())
                             .docs;
-                        if (docs.length > 0) {
-                            this.queueSnapshot = docs;
-                            this.queue = docs.map(function (item) { return item.data(); });
-                        }
+                        this.queueSnapshot = docs;
+                        this.queue = docs.map(function (item) { return item.data(); });
+                        _a.label = 2;
+                    case 2:
                         event.target.complete();
                         return [2 /*return*/];
                 }

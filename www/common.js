@@ -202,12 +202,15 @@ var QueuesService = /** @class */ (function () {
             .valueChanges();
     };
     QueuesService.prototype.getQueueById = function (id, limit) {
-        return this.db
-            .doc(id)
-            .collection(this.storageCollectionKey, function (ref) { return ref
-            .orderBy('date_created')
-            .limit(limit); })
-            .get();
+        return {
+            collection: this.db
+                .doc(id)
+                .collection(this.storageCollectionKey, function (ref) { return ref
+                .orderBy('date_created')
+                .limit(limit); })
+                .get(),
+            info: this.db.doc(id).valueChanges()
+        };
     };
     QueuesService.prototype.getQueueByIdFromTo = function (id, startSnapshot, limit, includeFirst) {
         if (includeFirst) {
