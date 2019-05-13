@@ -4,6 +4,8 @@
     <list default="true" id="c188269c-a2e1-414f-b175-fa657183c3e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/queues/queues.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages-queues-queues-module.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-queues-queues-module.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/pages-queues-queues-module.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/pages-queues-queues-module.js.map" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -51,9 +53,14 @@
         <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="112">
-              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/azure-pipelines.yml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -205,12 +212,12 @@
       <workItem from="1557563502356" duration="16537000" />
       <workItem from="1557641874738" duration="2880000" />
       <workItem from="1557671571541" duration="25953000" />
-      <workItem from="1557763697822" duration="1941000" />
+      <workItem from="1557763697822" duration="3133000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153675000" />
+    <option name="totallyTimeSpent" value="154867000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="427" y="0" width="1500" height="1057" extended-state="0" />
@@ -218,10 +225,10 @@
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.19904241" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.19904241" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.267316" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49921876" visible="true" weight="0.267316" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50078124" side_tool="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
@@ -262,13 +269,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/router/src/router.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="122" column="59" lean-forward="true" selection-start-line="122" selection-start-column="37" selection-end-line="122" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -1139,6 +1139,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/azure-pipelines.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/queue/queue.page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -1152,7 +1155,7 @@
     <entry file="file://$PROJECT_DIR$/src/app/pages/queues/queues.page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
