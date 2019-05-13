@@ -52,7 +52,7 @@ var QueuePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button></ion-back-button>\r\n        </ion-buttons>\r\n\r\n        <ion-title *ngIf=\"activeQueue\">\r\n            {{ activeQueue.queueType }}\r\n            Очередь\r\n            <span *ngIf=\"activeQueue.videoQueueLen\">({{ activeQueue.videoQueueLen }}шт.)</span>\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n    <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n        <ion-refresher-content></ion-refresher-content>\r\n    </ion-refresher>\r\n\r\n    <div *ngIf=\"queue?.length > 0\">\r\n        <div id=\"cards\">\r\n            <app-queue-video\r\n                    *ngFor=\"let queueItem of queue; let last = last; let index = index; trackBy: trackQueue\"\r\n                    [queueItem]=\"queueItem\"\r\n                    [last]=\"last\"\r\n                    [index]=\"index\"\r\n                    (removeItem)=\"removeItem($event)\"\r\n                    (lastVideoLoad)=\"onLastVideoLoad()\">\r\n            </app-queue-video>\r\n        </div>\r\n\r\n\r\n        <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n            <ion-infinite-scroll-content\r\n                    loadingSpinner=\"bubbles\"\r\n                    loadingText=\"Loading more data...\">\r\n            </ion-infinite-scroll-content>\r\n        </ion-infinite-scroll>\r\n    </div>\r\n\r\n\r\n    <h2 *ngIf=\"queue?.length === 0\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n    <ion-toolbar>\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button></ion-back-button>\r\n        </ion-buttons>\r\n\r\n        <ion-title *ngIf=\"activeQueue\">\r\n            {{ activeQueue.queueType }}\r\n            Очередь\r\n            <span *ngIf=\"activeQueue.videoQueueLen\">({{ activeQueue.videoQueueLen }}шт.)</span>\r\n        </ion-title>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n    <div *ngIf=\"loaded\">\r\n        <div *ngIf=\"queue?.length > 0\">\r\n            <div @list id=\"cards\">\r\n                <app-queue-video\r\n                        @items\r\n                        *ngFor=\"let queueItem of queue; let last = last; let index = index; trackBy: trackQueue\"\r\n                        [queueItem]=\"queueItem\"\r\n                        [last]=\"last\"\r\n                        [index]=\"index\"\r\n                        (removeItem)=\"removeItem($event)\"\r\n                        (lastVideoLoad)=\"onLastVideoLoad()\">\r\n                </app-queue-video>\r\n            </div>\r\n\r\n\r\n            <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n                <ion-infinite-scroll-content\r\n                        loadingSpinner=\"bubbles\"\r\n                        loadingText=\"Loading more data...\">\r\n                </ion-infinite-scroll-content>\r\n            </ion-infinite-scroll>\r\n        </div>\r\n\r\n        <h2 *ngIf=\"queue?.length === 0\" text-center>Пустовато</h2>\r\n    </div>\r\n\r\n\r\n    <h2 *ngIf=\"!loaded\" text-center>\r\n        ...загрузка\r\n    </h2>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -82,17 +82,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _services_queues_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/queues.service */ "./src/app/services/queues.service.ts");
-/* harmony import */ var _services_history_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/history.service */ "./src/app/services/history.service.ts");
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _services_queues_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/queues.service */ "./src/app/services/queues.service.ts");
+/* harmony import */ var _services_history_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/history.service */ "./src/app/services/history.service.ts");
 
 
 
 
 
 
-// import * as html2canvas from 'html2canvas';
+
 
 
 var QueuePage = /** @class */ (function () {
@@ -109,32 +110,39 @@ var QueuePage = /** @class */ (function () {
             videoQueueLen: null
         };
         this.limit = 2;
+        this.loaded = false;
         this.cardsHeightIsChecked = false;
     }
     QueuePage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activeQueue.queueType = this.route.snapshot.params.id;
+        if (this.activeQueue.queueType) {
+            this.initLoad();
+            // check for queue change
+            this.queuesService
+                .getQueueByIdSub(this.activeQueue.queueType, this.limit)
+                .subscribe(function (activeQueue) {
+                _this.activeQueue = activeQueue;
+                _this.checkInitHeight();
+            });
+            this.loaded = true;
+        }
+    };
+    QueuePage.prototype.initLoad = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var _a, collection, info, docs;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
-                switch (_b.label) {
+            var collection, docs;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        this.activeQueue.queueType = this.route.snapshot.params.id;
-                        if (!this.activeQueue.queueType) return [3 /*break*/, 2];
-                        _a = this.queuesService.getQueueById(this.activeQueue.queueType, this.limit), collection = _a.collection, info = _a.info;
+                        collection = this.queuesService.getQueueListById(this.activeQueue.queueType, this.limit);
                         return [4 /*yield*/, collection.toPromise()];
                     case 1:
-                        docs = (_b.sent()).docs;
+                        docs = (_a.sent()).docs;
                         // get snapshot and values
                         // snapshot need for lazyloading and removing items
                         this.queueSnapshot = docs;
                         this.queue = docs.map(function (item) { return item.data(); });
-                        // check for queue change
-                        info.subscribe(function (activeQueue) {
-                            _this.activeQueue = activeQueue;
-                        });
-                        this.checkInitHeight();
-                        _b.label = 2;
-                    case 2: return [2 /*return*/];
+                        return [2 /*return*/];
                 }
             });
         });
@@ -156,10 +164,9 @@ var QueuePage = /** @class */ (function () {
                                         icon: 'trash',
                                         handler: function () {
                                             var removedSnapshot = _this.queueSnapshot.splice(e.index, 1)[0];
-                                            var removed = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, _this.queue.splice(e.index, 1)[0], { date_removed: firebase_app__WEBPACK_IMPORTED_MODULE_5__["firestore"].FieldValue.serverTimestamp() });
+                                            var removed = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, _this.queue.splice(e.index, 1)[0], { date_removed: firebase_app__WEBPACK_IMPORTED_MODULE_6__["firestore"].FieldValue.serverTimestamp() });
                                             _this.historyService.pushToHistory(removed);
                                             _this.queuesService.deleteQueueItem(_this.activeQueue.queueType, removedSnapshot);
-                                            _this.checkInitHeight();
                                             remEl.classList.remove('on-removing');
                                         }
                                     }, {
@@ -199,31 +206,10 @@ var QueuePage = /** @class */ (function () {
                     _this.cardsHeightIsChecked = true;
                 }
             }
-        });
-    };
-    QueuePage.prototype.onRefresh = function (event) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var fromFirstSnapshot, toVisibleLength, docs;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        fromFirstSnapshot = this.queueSnapshot[0];
-                        if (!fromFirstSnapshot) return [3 /*break*/, 2];
-                        toVisibleLength = this.queueSnapshot.length;
-                        return [4 /*yield*/, this.queuesService
-                                .getQueueByIdFromTo(this.activeQueue.queueType, fromFirstSnapshot, toVisibleLength, true)
-                                .toPromise()];
-                    case 1:
-                        docs = (_a.sent())
-                            .docs;
-                        this.queueSnapshot = docs;
-                        this.queue = docs.map(function (item) { return item.data(); });
-                        _a.label = 2;
-                    case 2:
-                        event.target.complete();
-                        return [2 /*return*/];
-                }
-            });
+            else {
+                // in case if we have no cards but just added one more
+                _this.initLoad();
+            }
         });
     };
     QueuePage.prototype.loadMore = function () {
@@ -258,16 +244,36 @@ var QueuePage = /** @class */ (function () {
         }, 500);
     };
     QueuePage.prototype.trackQueue = function (index, queue) {
-        return queue ? queue.key : undefined;
+        return queue ? queue.id : undefined;
     };
     QueuePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-queue-list',
             template: __webpack_require__(/*! ./queue.page.html */ "./src/app/pages/queue/queue.page.html"),
+            animations: [
+                // nice stagger effect when showing existing elements
+                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["trigger"])('list', [
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["transition"])(':enter', [
+                        // child animation selector + stagger
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["query"])('@items', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["stagger"])(300, Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["animateChild"])()))
+                    ]),
+                ]),
+                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["trigger"])('items', [
+                    // cubic-bezier for a tiny bouncing feel
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["transition"])(':enter', [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["style"])({ transform: 'scale(0.5)', opacity: 0 }),
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["animate"])('1s cubic-bezier(.8,-0.6,0.2,1.5)', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["style"])({ transform: 'scale(1)', opacity: 1 }))
+                    ]),
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["transition"])(':leave', [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["style"])({ transform: 'scale(1)', opacity: 1, height: '*' }),
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["animate"])('1s cubic-bezier(.8,-0.6,0.2,1.5)', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_5__["style"])({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+                    ]),
+                ])
+            ],
             styles: [__webpack_require__(/*! ./queue.page.scss */ "./src/app/pages/queue/queue.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_queues_service__WEBPACK_IMPORTED_MODULE_6__["QueuesService"],
-            _services_history_service__WEBPACK_IMPORTED_MODULE_7__["HistoryService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_queues_service__WEBPACK_IMPORTED_MODULE_7__["QueuesService"],
+            _services_history_service__WEBPACK_IMPORTED_MODULE_8__["HistoryService"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],

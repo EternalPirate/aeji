@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 import { HistoryService, IHistoryItem } from '../../services/history.service';
 import { IQueueItem } from '../../services/queues.service';
@@ -36,7 +35,6 @@ import { animate, animateChild, query, stagger, style, transition, trigger } fro
 	]
 })
 export class HistoryPage implements OnInit {
-	historyLen: number;
 	limit = 2;
 	history: IHistoryItem[];
 	historySnapshot: QueryDocumentSnapshot<IHistoryItem>[];

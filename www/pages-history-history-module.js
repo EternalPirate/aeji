@@ -52,7 +52,7 @@ var HistoryPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n\r\n\r\n    <ion-title>\r\n      История\r\n      <span *ngIf=\"historyLen\">({{ historyLen }}шт.)</span>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <ion-refresher (ionRefresh)=\"onRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n\r\n\r\n  <div *ngIf=\"history?.length > 0\">\r\n    <div id=\"cards\">\r\n      <app-queue-video\r\n              *ngFor=\"let item of history; trackBy: trackQueue\"\r\n              [queueItem]=\"item\"\r\n              [isHistory]=\"true\">\r\n      </app-queue-video>\r\n    </div>\r\n\r\n    <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n      <ion-infinite-scroll-content\r\n              loadingSpinner=\"bubbles\"\r\n              loadingText=\"Loading more data...\">\r\n      </ion-infinite-scroll-content>\r\n    </ion-infinite-scroll>\r\n  </div>\r\n\r\n\r\n  <h2 *ngIf=\"history?.length === 0\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n\r\n\r\n    <ion-title>\r\n      История\r\n      <span *ngIf=\"history?.length > 0\">({{ history.length }}шт.)</span>\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <div *ngIf=\"history?.length > 0\">\r\n    <div @list id=\"cards\">\r\n      <app-queue-video\r\n              @items\r\n              *ngFor=\"let item of history; trackBy: trackQueue\"\r\n              [queueItem]=\"item\"\r\n              [isHistory]=\"true\">\r\n      </app-queue-video>\r\n    </div>\r\n\r\n    <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\r\n      <ion-infinite-scroll-content\r\n              loadingSpinner=\"bubbles\"\r\n              loadingText=\"Loading more data...\">\r\n      </ion-infinite-scroll-content>\r\n    </ion-infinite-scroll>\r\n  </div>\r\n\r\n\r\n  <h2 *ngIf=\"history?.length === 0\" text-center>Пустовато</h2>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -80,6 +80,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_history_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/history.service */ "./src/app/services/history.service.ts");
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
+
 
 
 
@@ -88,22 +90,29 @@ var HistoryPage = /** @class */ (function () {
         this.historyService = historyService;
         this.r = r;
         this.limit = 2;
-        this.cardsHeightIsChecked = false;
     }
     HistoryPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.initLoad();
+        this.historyService
+            .getHistorySub(this.limit)
+            .subscribe(function (e) {
+            _this.checkInitHeight();
+        });
+    };
+    HistoryPage.prototype.initLoad = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var docs;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.historyService
-                            .getHistory(this.limit)
+                            .getHistoryList(this.limit)
                             .toPromise()];
                     case 1:
                         docs = (_a.sent())
                             .docs;
                         this.historySnapshot = docs;
                         this.history = docs.map(function (item) { return item.data(); });
-                        this.checkInitHeight();
                         return [2 /*return*/];
                 }
             });
@@ -118,8 +127,11 @@ var HistoryPage = /** @class */ (function () {
                 if (cards && cards.clientHeight < wp.clientHeight) {
                     // if cards height less than screen we need to load more
                     _this.loadMore();
-                    _this.cardsHeightIsChecked = true;
                 }
+            }
+            else {
+                // in case if we have no cards but just added one more
+                _this.initLoad();
             }
         });
     };
@@ -145,31 +157,6 @@ var HistoryPage = /** @class */ (function () {
             });
         });
     };
-    HistoryPage.prototype.onRefresh = function (event) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var fromFirstSnapshot, toVisibleLength, docs;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        fromFirstSnapshot = this.historySnapshot[0];
-                        if (!fromFirstSnapshot) return [3 /*break*/, 2];
-                        toVisibleLength = this.historySnapshot.length;
-                        return [4 /*yield*/, this.historyService
-                                .getHistoryFromTo(fromFirstSnapshot, toVisibleLength, true)
-                                .toPromise()];
-                    case 1:
-                        docs = (_a.sent())
-                            .docs;
-                        this.historySnapshot = docs;
-                        this.history = docs.map(function (item) { return item.data(); });
-                        _a.label = 2;
-                    case 2:
-                        event.target.complete();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
     HistoryPage.prototype.onInfiniteScroll = function (event) {
         var _this = this;
         setTimeout(function () {
@@ -178,12 +165,32 @@ var HistoryPage = /** @class */ (function () {
         }, 500);
     };
     HistoryPage.prototype.trackQueue = function (index, queue) {
-        return queue ? queue.key : undefined;
+        return queue ? queue.id : undefined;
     };
     HistoryPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-history',
             template: __webpack_require__(/*! ./history.page.html */ "./src/app/pages/history/history.page.html"),
+            animations: [
+                // nice stagger effect when showing existing elements
+                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["trigger"])('list', [
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["transition"])(':enter', [
+                        // child animation selector + stagger
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["query"])('@items', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["stagger"])(300, Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["animateChild"])()))
+                    ]),
+                ]),
+                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["trigger"])('items', [
+                    // cubic-bezier for a tiny bouncing feel
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["transition"])(':enter', [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({ transform: 'scale(0.5)', opacity: 0 }),
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["animate"])('1s cubic-bezier(.8,-0.6,0.2,1.5)', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({ transform: 'scale(1)', opacity: 1 }))
+                    ]),
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["transition"])(':leave', [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({ transform: 'scale(1)', opacity: 1, height: '*' }),
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["animate"])('1s cubic-bezier(.8,-0.6,0.2,1.5)', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+                    ]),
+                ])
+            ],
             styles: [__webpack_require__(/*! ./history.page.scss */ "./src/app/pages/history/history.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_history_service__WEBPACK_IMPORTED_MODULE_2__["HistoryService"],

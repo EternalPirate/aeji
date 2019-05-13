@@ -34,7 +34,7 @@ export class HistoryService {
 			.get();
 	}
 
-	getHistorySub(limit: number): Observable<IHistoryItem[]> {
+	getHistorySub(limit: number): Observable<{}[]> {
 		return this.angularFirestore
 			.collection(this.storageKey, ref => ref
 				.orderBy('date_removed', 'desc')
