@@ -50,6 +50,7 @@ export class HistoryPage implements OnInit {
 	ngOnInit(): void {
 		this.initLoad();
 
+
 		this.historyService
 			.getHistorySub(this.limit)
 			.subscribe((e: IHistoryItem[]) => {
