@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <div *ngIf="loaded">
+    <div *ngIf="!loading">
         <div *ngIf="queue?.length > 0">
             <div @list id="cards">
                 <app-queue-video
@@ -40,8 +40,7 @@
         <h2 *ngIf="queue?.length === 0" text-center>Пустовато</h2>
     </div>
 
-
-    <h2 *ngIf="!loaded" text-center>
-        ...загрузка
-    </h2>
+    <ion-row *ngIf="loading" justify-content-center>
+        <ion-spinner name="dots"></ion-spinner>
+    </ion-row>
 </ion-content>

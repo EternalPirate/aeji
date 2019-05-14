@@ -35,9 +35,9 @@ import { QueuesService, IQueuesResponse, IQueueItem } from '../../services/queue
 	]
 })
 export class HomePage implements OnInit {
+	loading = true;
 	queuesNotEmpty = false;
 	queues: IQueuesResponse[];
-	loaded = false;
 
 	constructor(
 		private queuesService: QueuesService,
@@ -52,7 +52,7 @@ export class HomePage implements OnInit {
 			.subscribe((queues: IQueuesResponse[]) => {
 				this.queues = queues;
 				this.queuesNotEmpty = this.queues.some(item => item.videoQueueLen > 0);
-				this.loaded = true;
+				this.loading = false;
 			});
 	}
 

@@ -47,7 +47,7 @@ export class QueuePage implements OnInit {
 	limit = 2;
 	queue: IQueueItem[];
 	queueSnapshot: QueryDocumentSnapshot<IQueueItem>[];
-	loaded = false;
+	loading = true;
 	private cardsHeightIsChecked = false;
 
 	constructor(
@@ -75,7 +75,7 @@ export class QueuePage implements OnInit {
 					this.checkInitHeight();
 				});
 
-			this.loaded = true;
+			this.loading = false;
 		}
 	}
 

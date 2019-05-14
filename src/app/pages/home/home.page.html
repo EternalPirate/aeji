@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="loaded">
+  <div *ngIf="!loading">
     <ion-list *ngIf="queuesNotEmpty" @list>
       <ion-item
               @items
@@ -26,8 +26,7 @@
     <h2 *ngIf="!queuesNotEmpty" text-center>Пустовато</h2>
   </div>
 
-
-  <h2 *ngIf="!loaded" text-center>
-    ...загрузка
-  </h2>
+  <ion-row *ngIf="loading" justify-content-center>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-row>
 </ion-content>

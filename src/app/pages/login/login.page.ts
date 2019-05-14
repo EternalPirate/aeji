@@ -40,6 +40,7 @@ export interface IGoogleLoginRes {
 	styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+	loading = true;
 
 	constructor(
 		private angularFireAuth: AngularFireAuth,
@@ -54,14 +55,17 @@ export class LoginPage implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.loading = false;
 	}
 
 	async logIn(): Promise<void> {
+		this.loading = true;
 		const gLoginRes: IGoogleLoginRes = await this.doGoogleLogin();
 
 		if (gLoginRes && gLoginRes.additionalUserInfo && gLoginRes.additionalUserInfo.profile) {
 			this.userService.setUser(gLoginRes.additionalUserInfo.profile);
 			this.router.navigate(['/']);
+			this.loading = false;
 		} else {
 			throw new Error('Can\'t save user credentials.');
 		}

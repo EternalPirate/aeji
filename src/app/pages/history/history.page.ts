@@ -35,6 +35,7 @@ import { animate, animateChild, query, stagger, style, transition, trigger } fro
 	]
 })
 export class HistoryPage implements OnInit {
+	loading = true;
 	limit = 2;
 	history: IHistoryItem[];
 	historySnapshot: QueryDocumentSnapshot<IHistoryItem>[];
@@ -64,6 +65,7 @@ export class HistoryPage implements OnInit {
 
 		this.historySnapshot = docs;
 		this.history = docs.map(item => item.data());
+		this.loading = false;
 	}
 
 	checkInitHeight(): void {

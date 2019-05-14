@@ -1,7 +1,9 @@
 <ion-content>
   <ion-row class="login-wp" align-items-center justify-content-center>
-    <ion-button (click)="logIn()">
+    <ion-button *ngIf="!loading" (click)="logIn()">
       login
     </ion-button>
+
+    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
   </ion-row>
 </ion-content>
