@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { IQueueItem } from './queues.service';
+import { IGoogleUserProfile } from '../pages/login/login.page';
+import { AuthGuardService } from './auth-guard.service';
 
 export interface IHistoryItem extends IQueueItem {
 	date_removed: firebase.firestore.FieldValue;
@@ -13,20 +15,30 @@ export interface IHistoryItem extends IQueueItem {
 })
 export class HistoryService {
 	private storageKey = 'history';
-	private db: AngularFirestoreCollection<IHistoryItem>;
+	private db: AngularFirestoreDocument<any>;
 
 	constructor(
+		private authGuardService: AuthGuardService,
 		private angularFirestore: AngularFirestore
 	) {
-		this.db = this.angularFirestore.collection(this.storageKey);
+		this.initDb();
+	}
+
+	async initDb(): Promise<void> {
+		const user: IGoogleUserProfile = await this.authGuardService.getUser();
+		this.db = this.angularFirestore
+			.collection('users')
+			.doc(user.id);
 	}
 
 	pushToHistory(item: IHistoryItem) {
-		this.db.add(item);
+		this.db
+			.collection(this.storageKey)
+			.add(item);
 	}
 
 	getHistoryList(limit: number): Observable<firebase.firestore.QuerySnapshot> {
-		return this.angularFirestore
+		return this.db
 			.collection(this.storageKey, ref => ref
 				.orderBy('date_removed', 'desc')
 				.limit(limit)
@@ -35,7 +47,7 @@ export class HistoryService {
 	}
 
 	getHistorySub(limit: number): Observable<{}[]> {
-		return this.angularFirestore
+		return this.db
 			.collection(this.storageKey, ref => ref
 				.orderBy('date_removed', 'desc')
 				.limit(limit)
@@ -49,7 +61,7 @@ export class HistoryService {
 		includeFirst?: boolean
 	): Observable<firebase.firestore.QuerySnapshot> {
 		if (includeFirst) {
-			return this.angularFirestore
+			return this.db
 				.collection(this.storageKey, ref => ref
 					.orderBy('date_removed', 'desc')
 					.startAt(startSnapshot)
@@ -57,7 +69,7 @@ export class HistoryService {
 				)
 				.get();
 		} else {
-			return this.angularFirestore
+			return this.db
 				.collection(this.storageKey, ref => ref
 					.orderBy('date_removed', 'desc')
 					.startAfter(startSnapshot)

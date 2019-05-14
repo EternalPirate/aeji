@@ -9,12 +9,13 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatRippleModule, MatButtonModule } from '@angular/material';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -25,20 +26,20 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 	],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		IonicModule.forRoot(),
 		AppRoutingModule,
 		IonicStorageModule.forRoot(),
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule,
-		BrowserAnimationsModule,
-		MatRippleModule,
-		MatButtonModule
+		BrowserAnimationsModule
 	],
 	providers: [
 		StatusBar,
 		SplashScreen,
 		AppRoutingModule,
 		AngularFireDatabase,
+		AngularFireAuth,
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 	],
 	bootstrap: [AppComponent]

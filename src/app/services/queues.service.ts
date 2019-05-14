@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
+import { IGoogleUserProfile } from '../pages/login/login.page';
+import { AuthGuardService } from './auth-guard.service';
 
 export interface IQueuesResponse {
 	queueType: string;
@@ -24,13 +26,22 @@ export interface IQueueItem {
 })
 export class QueuesService {
 	private storageKey = 'queues';
-	private storageCollectionKey = 'videoQueue';
-	private db: AngularFirestoreCollection<IQueueItem>;
+	private storageCollectionKey = 'list';
+	private db: AngularFirestoreCollection<firebase.firestore.DocumentData>;
 
 	constructor(
+		private authGuardService: AuthGuardService,
 		private angularFirestore: AngularFirestore
 	) {
-		this.db = this.angularFirestore.collection(this.storageKey);
+		this.initDb();
+	}
+
+	async initDb(): Promise<void> {
+		const user: IGoogleUserProfile = await this.authGuardService.getUser();
+		this.db = this.angularFirestore
+			.collection('users')
+			.doc(user.id)
+			.collection(this.storageKey);
 	}
 
 	deleteQueueItem(docId: string, snapshot: QueryDocumentSnapshot<IQueueItem>): void {
@@ -59,8 +70,10 @@ export class QueuesService {
 			.get();
 	}
 
-	getQueueByIdSub(id: string, limit: number): Observable<{}> {
-		return this.db.doc(id).valueChanges();
+	getQueueByIdSub(id: string): Observable<{}> {
+		return this.db
+			.doc(id)
+			.valueChanges();
 	}
 
 	getQueueByIdFromTo(

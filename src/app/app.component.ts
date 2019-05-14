@@ -18,6 +18,11 @@ export class AppComponent {
 			title: 'История',
 			url: '/history',
 			icon: 'folder-open'
+		},
+		{
+			title: 'Настройки',
+			url: '/settings',
+			icon: 'settings'
 		}
 	];
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActionSheetController } from '@ionic/angular';
@@ -27,14 +27,14 @@ import { IRemoveQueueItemEvent } from '../../components/queue-video/queue-video.
 		trigger('items', [
 			// cubic-bezier for a tiny bouncing feel
 			transition(':enter', [
-				style({ transform: 'scale(0.5)', opacity: 0 }),
+				style({transform: 'scale(0.5)', opacity: 0}),
 				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
-					style({ transform: 'scale(1)', opacity: 1 }))
+					style({transform: 'scale(1)', opacity: 1}))
 			]),
 			transition(':leave', [
-				style({ transform: 'scale(1)', opacity: 1, height: '*' }),
+				style({transform: 'scale(1)', opacity: 1, height: '*'}),
 				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
-					style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
+					style({transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px'}))
 			]),
 		])
 	]
@@ -61,19 +61,21 @@ export class QueuePage implements OnInit {
 	) {
 	}
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
 		this.activeQueue.queueType = this.route.snapshot.params.id;
 
 		if (this.activeQueue.queueType) {
+			await this.queuesService.initDb();
+
 			this.initLoad();
 
 			// check for queue change
 			this.queuesService
-				.getQueueByIdSub(this.activeQueue.queueType, this.limit)
+				.getQueueByIdSub(this.activeQueue.queueType)
 				.subscribe((activeQueue: IQueuesResponse) => {
-				this.activeQueue = activeQueue;
-				this.checkInitHeight();
-			});
+					this.activeQueue = activeQueue;
+					this.checkInitHeight();
+				});
 
 			this.loaded = true;
 		}

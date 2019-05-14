@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { QueuesPage } from './queues.page';
+import { SettingsPage } from './settings.page';
 import { SharedModule } from '../../shared.module';
+
 
 @NgModule({
 	imports: [
@@ -10,11 +11,11 @@ import { SharedModule } from '../../shared.module';
 		RouterModule.forChild([
 			{
 				path: '',
-				component: QueuesPage
+				component: SettingsPage
 			}
 		])
 	],
-	declarations: [QueuesPage]
+	declarations: [SettingsPage]
 })
-export class QueuesPageModule {
+export class SettingsPageModule {
 }
