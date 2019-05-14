@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/app';
+
 import { UserService } from '../../services/user.service';
 
 export interface IGoogleUserProfile {
@@ -44,20 +44,22 @@ export class LoginPage implements OnInit {
 	constructor(
 		private angularFireAuth: AngularFireAuth,
 		private userService: UserService,
-		private storage: Storage,
-		private router: Router
+		private router: Router,
 	) {
+		const user = this.userService.user.value;
+
+		if (user) {
+			this.router.navigate(['/']);
+		}
 	}
 
-	ngOnInit() {
+	ngOnInit(): void {
 	}
 
 	async logIn(): Promise<void> {
 		const gLoginRes: IGoogleLoginRes = await this.doGoogleLogin();
 
 		if (gLoginRes && gLoginRes.additionalUserInfo && gLoginRes.additionalUserInfo.profile) {
-			await this.storage.set('user', gLoginRes.additionalUserInfo.profile);
-			await this.userService.initDb();
 			this.userService.setUser(gLoginRes.additionalUserInfo.profile);
 			this.router.navigate(['/']);
 		} else {

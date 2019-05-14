@@ -65,8 +65,6 @@ export class QueuePage implements OnInit {
 		this.activeQueue.queueType = this.route.snapshot.params.id;
 
 		if (this.activeQueue.queueType) {
-			await this.queuesService.initDb();
-
 			this.initLoad();
 
 			// check for queue change

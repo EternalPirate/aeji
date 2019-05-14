@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { IGoogleUserProfile } from '../login/login.page';
-import { AuthGuardService } from '../../services/auth-guard.service';
 
 export interface IUserSettings {
 	donationalertsId: string;
@@ -32,14 +31,11 @@ export class SettingsPage implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private userService: UserService,
-		private authGuardService: AuthGuardService,
 		private httpClient: HttpClient
 	) {
 	}
 
 	async ngOnInit() {
-		await this.userService.initDb();
-
 		this.userService
 			.getUserData()
 			.subscribe((userData: IUserData) => {
@@ -50,7 +46,7 @@ export class SettingsPage implements OnInit {
 				}
 			});
 
-		this.user = await this.authGuardService.getUser();
+		this.user = this.userService.user.value;
 	}
 
 	submit(form): void {

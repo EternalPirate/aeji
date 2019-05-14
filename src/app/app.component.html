@@ -1,18 +1,37 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu *ngIf="user">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Меню</ion-title>
+          <ion-title>
+            <ion-chip color="light" no-margin>
+              <ion-avatar>
+                <img [src]="user.picture">
+              </ion-avatar>
+              <ion-label>
+                {{ user.name }}
+              </ion-label>
+            </ion-chip>
+          </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-menu-toggle *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon [name]="p.icon" slot="start" color="light"></ion-icon>
               <ion-label>
                 {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle>
+            <ion-item (click)="logOut()">
+              <ion-icon name="power" slot="start" color="light"></ion-icon>
+              <ion-label>
+                Выйти
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
