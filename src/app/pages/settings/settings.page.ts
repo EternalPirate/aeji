@@ -73,8 +73,10 @@ export class SettingsPage implements OnInit {
 		if (form.valid) {
 			const settings = form.value;
 
-			const headers = new HttpHeaders({userId: this.user.id});
-			this.httpClient.post(`${environment.apiURL}/settings`, settings, {headers}).toPromise();
+			this.httpClient.post(`${environment.apiURL}/settings`, {
+				userId: this.user.id,
+				settings
+			}).toPromise();
 
 			this.userService.setSettings(settings);
 

@@ -50,7 +50,6 @@ export class AppComponent {
 			this.splashScreen.hide();
 
 			this.userService.user.subscribe(user => {
-				console.log(user);
 				this.user = user;
 				this.menuController.enable(Boolean(user), 'menu');
 			});
