@@ -164,7 +164,7 @@ var QueuePage = /** @class */ (function () {
                         return [4 /*yield*/, this.actionSheetController.create({
                                 header: 'Точно удалить?',
                                 buttons: [{
-                                        text: 'Да',
+                                        text: 'Yes',
                                         role: 'destructive',
                                         icon: 'trash',
                                         handler: function () {
@@ -175,7 +175,7 @@ var QueuePage = /** @class */ (function () {
                                             remEl.classList.remove('on-removing');
                                         }
                                     }, {
-                                        text: 'Отмена',
+                                        text: 'Cancel',
                                         icon: 'close',
                                         role: 'cancel',
                                         handler: function () {
