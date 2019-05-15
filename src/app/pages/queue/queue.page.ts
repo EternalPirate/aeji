@@ -96,7 +96,7 @@ export class QueuePage implements OnInit {
 		const actionSheet = await this.actionSheetController.create({
 			header: 'Точно удалить?',
 			buttons: [{
-				text: 'Да',
+				text: 'Yes',
 				role: 'destructive',
 				icon: 'trash',
 				handler: () => {
@@ -112,7 +112,7 @@ export class QueuePage implements OnInit {
 					remEl.classList.remove('on-removing');
 				}
 			}, {
-				text: 'Отмена',
+				text: 'Cancel',
 				icon: 'close',
 				role: 'cancel',
 				handler: () => {
