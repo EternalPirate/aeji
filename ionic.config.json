@@ -1,0 +1,7 @@
+{
+  "name": "aEje",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

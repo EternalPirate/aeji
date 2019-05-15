@@ -1,0 +1,12 @@
+<ion-content>
+  <img src="./assets/aeji.gif" alt="" class="login-aeji">
+  
+  <ion-row class="login-wp" align-items-center justify-content-center>
+    <ion-button *ngIf="!loading" (click)="logIn()">
+      <ion-icon name="logo-google"></ion-icon>
+      <span class="login-g">login</span>
+    </ion-button>
+
+    <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
+  </ion-row>
+</ion-content>

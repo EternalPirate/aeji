@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+
+    <ion-title>
+      History
+      <span *ngIf="history?.length > 0">({{ history.length }}шт.)</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="!loading">
+    <div *ngIf="history?.length > 0">
+      <div @list id="cards">
+        <app-queue-video
+                @items
+                *ngFor="let item of history; trackBy: trackQueue"
+                [queueItem]="item"
+                [isHistory]="true">
+        </app-queue-video>
+      </div>
+
+      <ion-infinite-scroll threshold="5px" (ionInfinite)="onInfiniteScroll($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+
+    <h2 *ngIf="history?.length === 0" text-center>empty</h2>
+  </div>
+
+  <ion-row *ngIf="loading" justify-content-center>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-row>
+</ion-content>
