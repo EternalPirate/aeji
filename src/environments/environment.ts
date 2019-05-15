@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-	apiURL: 'http://localhost:3000',
+	apiURL: 'http://aeji-server-aeji-server.7e14.starter-us-west-2.openshiftapps.com/',
 	production: false,
 	firebase: {
 		apiKey: 'AIzaSyCvnPaf_StwvfuIJPfMTTRaW2Hv7-nSQkU',
