@@ -47,11 +47,11 @@ export class LoginPage implements OnInit {
 		private userService: UserService,
 		private router: Router,
 	) {
-		const user = this.userService.user.value;
-
-		if (user) {
-			this.router.navigate(['/']);
-		}
+		this.userService.user.subscribe(user => {
+			if (!user) {
+				this.router.navigate(['/']);
+			}
+		});
 	}
 
 	ngOnInit(): void {

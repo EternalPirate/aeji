@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ModalController, ToastController } from '@ionic/angular';
 
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { IGoogleUserProfile } from '../login/login.page';
-import { ToastController } from '@ionic/angular';
+import { ImagePage } from '../../modals/image/image.page';
 
 export interface IUserSettings {
 	donationalertsId: string;
@@ -16,13 +17,29 @@ export interface IUserData {
 	user: IGoogleUserProfile;
 }
 
+export interface ISettingsHelp {
+	image: string;
+	title: string;
+}
+
+export enum SettingsHelp {
+	donationalerts,
+}
+
 @Component({
 	selector: 'app-settings',
 	templateUrl: './settings.page.html',
 	styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+	SettingsHelp = SettingsHelp;
 	user: IGoogleUserProfile;
+	help: ISettingsHelp[] = [
+		{
+			image: './assets/help/donationalerts.png',
+			title: 'Where I can find donationalerts id?'
+		}
+	];
 	settings = this.formBuilder.group({
 		donationalertsId: ['', Validators.compose([
 			Validators.minLength(5)
@@ -33,7 +50,8 @@ export class SettingsPage implements OnInit {
 		private formBuilder: FormBuilder,
 		private userService: UserService,
 		private httpClient: HttpClient,
-		public toastController: ToastController
+		private toastController: ToastController,
+		private modalController: ModalController
 	) {
 	}
 
@@ -62,6 +80,16 @@ export class SettingsPage implements OnInit {
 
 			this.showToastOnSubmit();
 		}
+	}
+
+	async test(helpId: SettingsHelp) {
+		const modal = await this.modalController.create({
+			component: ImagePage,
+			componentProps: {
+				help: this.help[helpId]
+			}
+		});
+		return await modal.present();
 	}
 
 	async showToastOnSubmit() {

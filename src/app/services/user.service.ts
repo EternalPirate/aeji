@@ -19,13 +19,16 @@ export class UserService {
 	) {
 		this.user.subscribe(user => {
 			if (user) {
-				if (user) {
-					this.db = this.angularFirestore
-						.collection('users')
-						.doc(user.id);
-				}
+				this.db = this.angularFirestore
+					.collection('users')
+					.doc(user.id);
 			}
 		});
+	}
+
+	async initDb() {
+		const user = await this.storage.get('user');
+		this.user.next(user);
 	}
 
 	setSettings(settings: IUserSettings): void {

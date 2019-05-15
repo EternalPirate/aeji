@@ -40,16 +40,14 @@ export class AppComponent {
 		private storage: Storage,
 		private router: Router,
 	) {
-		this.storage.get('user').then(user => {
-			this.userService.user.next(user);
-			this.initializeApp();
-		});
+		this.initializeApp();
 	}
 
 	initializeApp() {
 		this.platform.ready().then(() => {
 			this.statusBar.styleDefault();
 			this.splashScreen.hide();
+
 			this.userService.user.subscribe(user => {
 				this.user = user;
 			});

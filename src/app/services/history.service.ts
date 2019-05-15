@@ -22,11 +22,9 @@ export class HistoryService {
 	) {
 		this.userService.user.subscribe(user => {
 			if (user) {
-				if (user) {
-					this.db = this.angularFirestore
-						.collection('users')
-						.doc(user.id);
-				}
+				this.db = this.angularFirestore
+					.collection('users')
+					.doc(user.id);
 			}
 		});
 	}

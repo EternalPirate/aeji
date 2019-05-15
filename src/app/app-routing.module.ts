@@ -7,7 +7,7 @@ const routes: Routes = [
 	{path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
 	{path: 'queue/:id', canActivate: [AuthGuardService], loadChildren: './pages/queue/queue.module#QueuePageModule'},
 	{path: 'history', canActivate: [AuthGuardService], loadChildren: './pages/history/history.module#HistoryPageModule'},
-	{path: 'settings', canActivate: [AuthGuardService], loadChildren: './pages/settings/settings.module#SettingsPageModule'}
+	{path: 'settings', canActivate: [AuthGuardService], loadChildren: './pages/settings/settings.module#SettingsPageModule'},
 ];
 
 @NgModule({

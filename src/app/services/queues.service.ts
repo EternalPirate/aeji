@@ -35,12 +35,10 @@ export class QueuesService {
 	) {
 		this.userService.user.subscribe(user => {
 			if (user) {
-				if (user) {
-					this.db = this.angularFirestore
-						.collection('users')
-						.doc(user.id)
-						.collection(this.storageKey);
-				}
+				this.db = this.angularFirestore
+					.collection('users')
+					.doc(user.id)
+					.collection(this.storageKey);
 			}
 		});
 	}

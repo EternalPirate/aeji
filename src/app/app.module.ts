@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicStorageModule } from '@ionic/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -16,13 +15,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
+import { ImagePage } from './modals/image/image.page';
+import { UserService } from './services/user.service';
 
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		ImagePage
 	],
 	entryComponents: [
+		ImagePage
 	],
 	imports: [
 		BrowserModule,
@@ -40,6 +43,12 @@ import { environment } from '../environments/environment';
 		AppRoutingModule,
 		AngularFireDatabase,
 		AngularFireAuth,
+		{
+			provide: APP_INITIALIZER,
+			useFactory: (ds: UserService) => () => ds.initDb(),
+			deps: [UserService],
+			multi: true
+		},
 		{provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 	],
 	bootstrap: [AppComponent]
