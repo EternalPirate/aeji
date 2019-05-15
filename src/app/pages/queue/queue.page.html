@@ -6,7 +6,7 @@
 
         <ion-title *ngIf="activeQueue">
             {{ activeQueue.queueType }}
-            Очередь
+            Queue
             <span *ngIf="activeQueue.videoQueueLen">({{ activeQueue.videoQueueLen }}шт.)</span>
         </ion-title>
     </ion-toolbar>
@@ -37,7 +37,7 @@
             </ion-infinite-scroll>
         </div>
 
-        <h2 *ngIf="queue?.length === 0" text-center>Пустовато</h2>
+        <h2 *ngIf="queue?.length === 0" text-center>empty</h2>
     </div>
 
     <ion-row *ngIf="loading" justify-content-center>

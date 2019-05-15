@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
@@ -16,17 +16,17 @@ export class AppComponent {
 	user: IGoogleUserProfile;
 	appPages = [
 		{
-			title: 'Очереди',
+			title: 'Queues',
 			url: '/',
 			icon: 'home'
 		},
 		{
-			title: 'История',
+			title: 'History',
 			url: '/history',
 			icon: 'folder-open'
 		},
 		{
-			title: 'Настройки',
+			title: 'Settings',
 			url: '/settings',
 			icon: 'settings'
 		}
@@ -39,6 +39,7 @@ export class AppComponent {
 		private userService: UserService,
 		private storage: Storage,
 		private router: Router,
+		private menuController: MenuController
 	) {
 		this.initializeApp();
 	}
@@ -49,7 +50,9 @@ export class AppComponent {
 			this.splashScreen.hide();
 
 			this.userService.user.subscribe(user => {
+				console.log(user);
 				this.user = user;
+				this.menuController.enable(Boolean(user), 'menu');
 			});
 		});
 	}

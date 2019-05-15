@@ -6,7 +6,7 @@
 
 
     <ion-title>
-      История
+      History
       <span *ngIf="history?.length > 0">({{ history.length }}шт.)</span>
     </ion-title>
   </ion-toolbar>
@@ -34,7 +34,7 @@
     </div>
 
 
-    <h2 *ngIf="history?.length === 0" text-center>Пустовато</h2>
+    <h2 *ngIf="history?.length === 0" text-center>empty</h2>
   </div>
 
   <ion-row *ngIf="loading" justify-content-center>

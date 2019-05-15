@@ -3,6 +3,7 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-font-family: 'Alegreya Sans SC', sans-serif;
   --ion-toolbar-background: #212121;
   --ion-toolbar-color: #dbdbdb;
   --ion-background-color: #242424;
@@ -10,35 +11,6 @@
   --ion-item-color: #dbdbdb;
   --ion-text-color: #d1d1d1;
   --ion-item-background-activated: #3e3e3e;
-
-  //--ion-background-color	Background color of entire app
-  //--ion-background-color-rgb	Background color of entire app, rgb format
-  //--ion-text-color	Text color of entire app
-  //--ion-text-color-rgb	Text color of entire app, rgb format
-  //--ion-backdrop-color	Color of the Backdrop component
-  //--ion-overlay-background-color	Background color of the overlays
-  //--ion-border-color	Border color
-  //--ion-box-shadow-color	Box shadow color
-  //--ion-tab-bar-background	Background of the Tab bar
-  //--ion-tab-bar-background-focused	Background of the focused Tab bar
-  //--ion-tab-bar-border-color	Border color of the Tab bar
-  //--ion-tab-bar-color	Color of the Tab bar
-  //--ion-tab-bar-color-activated	Color of the activated Tab
-  //--ion-toolbar-background	Background of the Toolbar
-  //--ion-toolbar-border-color	Border color of the Toolbar
-  //--ion-toolbar-color	Color of the components in the Toolbar
-  //--ion-toolbar-color-activated	Color of the activated components in the Toolbar
-  //--ion-toolbar-color-unchecked	Color of the unchecked components in the Toolbar
-  //--ion-toolbar-color-checked	Color of the checked components in the Toolbar
-  //--ion-item-background	Background of the Item
-  //--ion-item-background-activated	Background of the activated Item
-  //--ion-item-border-color-	Border color of the Item
-  //--ion-item-color	Color of the components in the Item
-  //--ion-placeholder-color	Color of the placeholder in inputs
-
-
-
-
 
 
   /** primary **/
@@ -117,6 +89,12 @@
 ion-card {
   --ion-color-step-600: #cbcbcb;
   --ion-item-background: #353535;
+}
+
+.split-pane-visible>ion-menu.split-pane-side.menu-enabled {
+  max-width: 300px;
+  min-width: 300px;
+  width: 300px;
 }
 
 ion-card-title, ion-card-content, ion-card-subtitle {

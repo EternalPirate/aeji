@@ -30,7 +30,9 @@ import { UserService } from './services/user.service';
 	imports: [
 		BrowserModule,
 		HttpClientModule,
-		IonicModule.forRoot(),
+		IonicModule.forRoot({
+			swipeBackEnabled: false
+		}),
 		AppRoutingModule,
 		IonicStorageModule.forRoot(),
 		AngularFireModule.initializeApp(environment.firebase),

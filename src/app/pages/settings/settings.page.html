@@ -5,7 +5,7 @@
     </ion-buttons>
 
     <ion-title>
-      Настройки
+      Settings
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,14 +13,14 @@
 <ion-content>
   <form [formGroup]="settings" (ngSubmit)="submit(settings)">
     <ion-item class="ion-margin-bottom">
-      <ion-label position="floating">Виджет id от donationalerts</ion-label>
+      <ion-label position="floating">Widget id of donationalerts</ion-label>
       <ion-input formControlName="donationalertsId"></ion-input>
-      <ion-button (click)="test(SettingsHelp.donationalerts)" slot="end" class="aeji-input-btn">
+      <ion-button (click)="test(SettingsHelp.donationalerts)" slot="end" strong class="aeji-input-btn">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </ion-item>
 
 
-    <ion-button type="submit" [disabled]="settings.invalid" expand="full">Сохранить</ion-button>
+    <ion-button type="submit" [disabled]="settings.invalid" expand="full" strong>SAVE</ion-button>
   </form>
 </ion-content>
