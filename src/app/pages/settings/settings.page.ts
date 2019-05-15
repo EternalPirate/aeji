@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environments/environment';
 import { IGoogleUserProfile } from '../login/login.page';
+import { ToastController } from '@ionic/angular';
 
 export interface IUserSettings {
 	donationalertsId: string;
@@ -31,7 +32,8 @@ export class SettingsPage implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private userService: UserService,
-		private httpClient: HttpClient
+		private httpClient: HttpClient,
+		public toastController: ToastController
 	) {
 	}
 
@@ -54,10 +56,21 @@ export class SettingsPage implements OnInit {
 			const settings = form.value;
 
 			const headers = new HttpHeaders({userId: this.user.id});
-			this.httpClient.post(`${environment.apiURL}/settings`, settings, { headers }).toPromise();
+			this.httpClient.post(`${environment.apiURL}/settings`, settings, {headers}).toPromise();
 
 			this.userService.setSettings(settings);
-		}
 
+			this.showToastOnSubmit();
+		}
+	}
+
+	async showToastOnSubmit() {
+		const toast = await this.toastController.create({
+			message: 'Settings saved',
+			position: 'bottom',
+			duration: 2000,
+			showCloseButton: true
+		});
+		toast.present();
 	}
 }

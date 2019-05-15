@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
 
 		if (gLoginRes && gLoginRes.additionalUserInfo && gLoginRes.additionalUserInfo.profile) {
 			this.userService.setUser(gLoginRes.additionalUserInfo.profile);
-			this.router.navigate(['/']);
+			await this.router.navigate(['/']);
 			this.loading = false;
 		} else {
 			throw new Error('Can\'t save user credentials.');
