@@ -48,8 +48,6 @@ export class QueuePage implements OnInit {
 	queue: IQueueItem[];
 	queueSnapshot: QueryDocumentSnapshot<IQueueItem>[];
 	loading = true;
-	private checkHeightCount = 0;
-	private checkHeightCountLimit = 5;
 
 	constructor(
 		private queuesService: QueuesService,
@@ -130,7 +128,7 @@ export class QueuePage implements OnInit {
 			if (cards) {
 				const wp = cards.closest('ion-content');
 
-				if (cards && cards.clientHeight < wp.clientHeight && this.checkHeightCount <= this.checkHeightCountLimit) {
+				if (cards && cards.clientHeight < wp.clientHeight) {
 					// if cards height less than screen we need to load more
 					this.loadMore();
 				}
@@ -152,7 +150,6 @@ export class QueuePage implements OnInit {
 
 			this.queueSnapshot = docs ? this.queueSnapshot.concat(...docs) : null;
 			this.queue = docs ? this.queue.concat(...docs.map(item => item.data())) : null;
-			this.checkInitHeight();
 		}
 	}
 

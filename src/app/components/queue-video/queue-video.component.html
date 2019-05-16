@@ -8,14 +8,20 @@
 
   <ion-card-content>
     <ion-row justify-content-between align-items-center>
-      <ion-card-title size="auto">
-        <span *ngIf="queueItem.username">{{ queueItem.username }} - </span>
-        {{ queueItem.amount }} RUB
-      </ion-card-title>
+      <ion-col size="10">
+        <ion-text>
+          <h1>
+            <span *ngIf="queueItem.username">{{ queueItem.username }} - </span>
+            {{ queueItem.amount }} RUB
+          </h1>
+        </ion-text>
+      </ion-col>
 
-      <ion-button *ngIf="!isHistory && index === 0" (click)="onRemoveItem($event, index)" color="danger" size="small">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
+      <ion-col size="2">
+        <ion-button *ngIf="!isHistory && index === 0" (click)="onRemoveItem($event, index)" color="danger" size="small">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
     </ion-row>
 
     {{ queueItem.message }}

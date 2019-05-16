@@ -40,8 +40,6 @@ export class HistoryPage implements OnInit {
 	historyLen = 0;
 	history: IHistoryItem[];
 	historySnapshot: QueryDocumentSnapshot<IHistoryItem>[];
-	private checkHeightCount = 0;
-	private checkHeightCountLimit = 5;
 
 	constructor(
 		private historyService: HistoryService,
@@ -79,7 +77,7 @@ export class HistoryPage implements OnInit {
 			if (cards) {
 				const wp = cards.closest('ion-content');
 
-				if (cards && cards.clientHeight < wp.clientHeight && this.checkHeightCount <= this.checkHeightCountLimit) {
+				if (cards && cards.clientHeight < wp.clientHeight) {
 					// if cards height less than screen we need to load more
 					this.loadMore();
 				}
@@ -101,7 +99,6 @@ export class HistoryPage implements OnInit {
 
 			this.historySnapshot = docs ? this.historySnapshot.concat(...docs) : null;
 			this.history = docs ? this.history.concat(...docs.map(item => item.data())) : null;
-			this.checkInitHeight();
 		}
 	}
 
