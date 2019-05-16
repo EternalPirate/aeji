@@ -1,6 +1,5 @@
 <ion-card>
   <iframe [src]="queueItem.url | safe: 'resourceUrl'"
-          (load)="last ? onLastVideoLoad() : null"
           width="100%"
           height="180"
           frameborder="0"
