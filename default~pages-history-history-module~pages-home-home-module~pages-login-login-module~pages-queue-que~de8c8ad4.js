@@ -776,7 +776,7 @@ InfiniteScrollModule.decorators = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-card #card>\n  <iframe [src]=\"queueItem.url | safe: 'resourceUrl'\"\n          (load)=\"last ? onLastVideoLoad() : null\"\n          width=\"100%\"\n          height=\"180\"\n          frameborder=\"0\"\n          allowfullscreen></iframe>\n\n  <ion-card-content>\n    <ion-row justify-content-between align-items-center>\n      <ion-card-title size=\"auto\">\n        <span *ngIf=\"queueItem.username\">{{ queueItem.username }} - </span>\n        {{ queueItem.amount }} RUB\n      </ion-card-title>\n\n      <ion-button *ngIf=\"!isHistory && index === 0\" (click)=\"onRemoveItem($event, index)\" color=\"danger\" size=\"small\">\n        <ion-icon name=\"trash\"></ion-icon>\n      </ion-button>\n    </ion-row>\n\n    {{ queueItem.message }}\n\n    <ion-card-subtitle text-end>{{ queueItem.date_created | date: 'dd MMM (hh:mm)' }}</ion-card-subtitle>\n  </ion-card-content>\n</ion-card>\n"
+module.exports = "<ion-card>\n  <iframe [src]=\"queueItem.url | safe: 'resourceUrl'\"\n          (load)=\"last ? onLastVideoLoad() : null\"\n          width=\"100%\"\n          height=\"180\"\n          frameborder=\"0\"\n          allowfullscreen></iframe>\n\n  <ion-card-content>\n    <ion-row justify-content-between align-items-center>\n      <ion-card-title size=\"auto\">\n        <span *ngIf=\"queueItem.username\">{{ queueItem.username }} - </span>\n        {{ queueItem.amount }} RUB\n      </ion-card-title>\n\n      <ion-button *ngIf=\"!isHistory && index === 0\" (click)=\"onRemoveItem($event, index)\" color=\"danger\" size=\"small\">\n        <ion-icon name=\"trash\"></ion-icon>\n      </ion-button>\n    </ion-row>\n\n    {{ queueItem.message }}\n\n    <ion-card-subtitle text-end>{{ queueItem.date_created | date: 'dd MMM (hh:mm)' }}</ion-card-subtitle>\n  </ion-card-content>\n</ion-card>\n"
 
 /***/ }),
 
@@ -807,13 +807,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var QueueVideoComponent = /** @class */ (function () {
     function QueueVideoComponent() {
-        this.lastVideoLoad = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.removeItem = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }
     QueueVideoComponent.prototype.ngOnInit = function () {
-    };
-    QueueVideoComponent.prototype.onLastVideoLoad = function () {
-        this.lastVideoLoad.emit();
     };
     QueueVideoComponent.prototype.onRemoveItem = function (event, index) {
         this.removeItem.emit({ event: event, index: index });
@@ -828,16 +824,8 @@ var QueueVideoComponent = /** @class */ (function () {
     ], QueueVideoComponent.prototype, "isHistory", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)
-    ], QueueVideoComponent.prototype, "last", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Number)
     ], QueueVideoComponent.prototype, "index", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
-    ], QueueVideoComponent.prototype, "lastVideoLoad", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)

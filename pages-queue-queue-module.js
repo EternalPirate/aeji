@@ -52,7 +52,7 @@ var QueuePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n\n        <ion-title *ngIf=\"activeQueue\">\n            {{ activeQueue.queueType }}\n            Queue\n            <span *ngIf=\"activeQueue.videoQueueLen\">({{ activeQueue.videoQueueLen }}шт.)</span>\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n    <div *ngIf=\"!loading\">\n        <div *ngIf=\"queue?.length > 0\">\n            <div @list id=\"cards\">\n                <app-queue-video\n                        @items\n                        *ngFor=\"let queueItem of queue; let last = last; let index = index; trackBy: trackQueue\"\n                        [queueItem]=\"queueItem\"\n                        [last]=\"last\"\n                        [index]=\"index\"\n                        (removeItem)=\"removeItem($event)\"\n                        (lastVideoLoad)=\"onLastVideoLoad()\">\n                </app-queue-video>\n            </div>\n\n\n            <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\n                <ion-infinite-scroll-content\n                        loadingSpinner=\"bubbles\"\n                        loadingText=\"Loading more data...\">\n                </ion-infinite-scroll-content>\n            </ion-infinite-scroll>\n        </div>\n\n        <h2 *ngIf=\"queue?.length === 0\" text-center>empty</h2>\n    </div>\n\n    <ion-row *ngIf=\"loading\" justify-content-center>\n        <ion-spinner name=\"dots\"></ion-spinner>\n    </ion-row>\n</ion-content>\n"
+module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n\n        <ion-title *ngIf=\"activeQueue\">\n            {{ activeQueue.queueType }}\n            Queue\n            <span *ngIf=\"activeQueue.videoQueueLen\"> - {{ activeQueue.videoQueueLen }}</span>\n        </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n    <div *ngIf=\"!loading\">\n        <div *ngIf=\"queue?.length > 0\">\n            <div @list id=\"cards\">\n                <app-queue-video\n                        @items\n                        *ngFor=\"let queueItem of queue; let index = index; trackBy: trackQueue\"\n                        [queueItem]=\"queueItem\"\n                        [index]=\"index\"\n                        (removeItem)=\"removeItem($event)\">\n                </app-queue-video>\n            </div>\n\n\n            <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\n                <ion-infinite-scroll-content\n                        loadingSpinner=\"bubbles\"\n                        loadingText=\"Loading more data...\">\n                </ion-infinite-scroll-content>\n            </ion-infinite-scroll>\n        </div>\n\n        <h2 *ngIf=\"queue?.length === 0\" text-center>empty</h2>\n    </div>\n\n    <ion-row *ngIf=\"loading\" justify-content-center>\n        <ion-spinner name=\"dots\"></ion-spinner>\n    </ion-row>\n</ion-content>\n"
 
 /***/ }),
 
@@ -109,9 +109,10 @@ var QueuePage = /** @class */ (function () {
             queueType: null,
             videoQueueLen: null
         };
-        this.limit = 2;
+        this.limit = 3;
         this.loading = true;
-        this.cardsHeightIsChecked = false;
+        this.checkHeightCount = 0;
+        this.checkHeightCountLimit = 5;
     }
     QueuePage.prototype.ngOnInit = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -127,7 +128,6 @@ var QueuePage = /** @class */ (function () {
                         _this.activeQueue = activeQueue;
                         _this.checkInitHeight();
                     });
-                    this.loading = false;
                 }
                 return [2 /*return*/];
             });
@@ -147,6 +147,7 @@ var QueuePage = /** @class */ (function () {
                         // snapshot need for lazyloading and removing items
                         this.queueSnapshot = docs;
                         this.queue = docs.map(function (item) { return item.data(); });
+                        this.loading = false;
                         return [2 /*return*/];
                 }
             });
@@ -162,7 +163,7 @@ var QueuePage = /** @class */ (function () {
                         remEl = e.event.target;
                         remEl.classList.add('on-removing');
                         return [4 /*yield*/, this.actionSheetController.create({
-                                header: 'Точно удалить?',
+                                header: 'Are you sure?',
                                 buttons: [{
                                         text: 'Yes',
                                         role: 'destructive',
@@ -193,29 +194,22 @@ var QueuePage = /** @class */ (function () {
             });
         });
     };
-    QueuePage.prototype.onLastVideoLoad = function () {
-        // onLastVideoLoad need to checkInitHeight
-        if (!this.cardsHeightIsChecked) {
-            this.checkInitHeight();
-        }
-    };
     QueuePage.prototype.checkInitHeight = function () {
         var _this = this;
         setTimeout(function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
             if (cards) {
                 var wp = cards.closest('ion-content');
-                if (cards && cards.clientHeight < wp.clientHeight) {
+                if (cards && cards.clientHeight < wp.clientHeight && _this.checkHeightCount <= _this.checkHeightCountLimit) {
                     // if cards height less than screen we need to load more
                     _this.loadMore();
-                    _this.cardsHeightIsChecked = true;
                 }
             }
             else {
                 // in case if we have no cards but just added one more
                 _this.initLoad();
             }
-        });
+        }, 100);
     };
     QueuePage.prototype.loadMore = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -231,10 +225,9 @@ var QueuePage = /** @class */ (function () {
                     case 1:
                         docs = (_c.sent())
                             .docs;
-                        if (docs.length > 0) {
-                            this.queueSnapshot = (_a = this.queueSnapshot).concat.apply(_a, docs);
-                            this.queue = (_b = this.queue).concat.apply(_b, docs.map(function (item) { return item.data(); }));
-                        }
+                        this.queueSnapshot = docs ? (_a = this.queueSnapshot).concat.apply(_a, docs) : null;
+                        this.queue = docs ? (_b = this.queue).concat.apply(_b, docs.map(function (item) { return item.data(); })) : null;
+                        this.checkInitHeight();
                         _c.label = 2;
                     case 2: return [2 /*return*/];
                 }

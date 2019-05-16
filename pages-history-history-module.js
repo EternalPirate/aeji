@@ -52,7 +52,7 @@ var HistoryPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n\n\n    <ion-title>\n      History\n      <span *ngIf=\"history?.length > 0\">({{ history.length }}шт.)</span>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <div *ngIf=\"!loading\">\n    <div *ngIf=\"history?.length > 0\">\n      <div @list id=\"cards\">\n        <app-queue-video\n                @items\n                *ngFor=\"let item of history; trackBy: trackQueue\"\n                [queueItem]=\"item\"\n                [isHistory]=\"true\">\n        </app-queue-video>\n      </div>\n\n      <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\n        <ion-infinite-scroll-content\n                loadingSpinner=\"bubbles\"\n                loadingText=\"Loading more data...\">\n        </ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n    </div>\n\n\n    <h2 *ngIf=\"history?.length === 0\" text-center>empty</h2>\n  </div>\n\n  <ion-row *ngIf=\"loading\" justify-content-center>\n    <ion-spinner name=\"dots\"></ion-spinner>\n  </ion-row>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n\n\n    <ion-title>\n      History\n      <span *ngIf=\"historyLen > 0\"> - {{ historyLen }}</span>\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <div *ngIf=\"!loading\">\n    <div *ngIf=\"history?.length > 0\">\n      <div @list id=\"cards\">\n        <app-queue-video\n                @items\n                *ngFor=\"let item of history; trackBy: trackQueue\"\n                [queueItem]=\"item\"\n                [isHistory]=\"true\">\n        </app-queue-video>\n      </div>\n\n      <ion-infinite-scroll threshold=\"5px\" (ionInfinite)=\"onInfiniteScroll($event)\">\n        <ion-infinite-scroll-content\n                loadingSpinner=\"bubbles\"\n                loadingText=\"Loading more data...\">\n        </ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n    </div>\n\n\n    <h2 *ngIf=\"history?.length === 0\" text-center>empty</h2>\n  </div>\n\n  <ion-row *ngIf=\"loading\" justify-content-center>\n    <ion-spinner name=\"dots\"></ion-spinner>\n  </ion-row>\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,14 +90,18 @@ var HistoryPage = /** @class */ (function () {
         this.historyService = historyService;
         this.r = r;
         this.loading = true;
-        this.limit = 2;
+        this.limit = 3;
+        this.historyLen = 0;
+        this.checkHeightCount = 0;
+        this.checkHeightCountLimit = 5;
     }
     HistoryPage.prototype.ngOnInit = function () {
         var _this = this;
         this.initLoad();
         this.historyService
-            .getHistorySub(this.limit)
-            .subscribe(function (e) {
+            .getHistorySub()
+            .subscribe(function (items) {
+            _this.historyLen = items.length;
             _this.checkInitHeight();
         });
     };
@@ -126,7 +130,7 @@ var HistoryPage = /** @class */ (function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
             if (cards) {
                 var wp = cards.closest('ion-content');
-                if (cards && cards.clientHeight < wp.clientHeight) {
+                if (cards && cards.clientHeight < wp.clientHeight && _this.checkHeightCount <= _this.checkHeightCountLimit) {
                     // if cards height less than screen we need to load more
                     _this.loadMore();
                 }
@@ -135,7 +139,7 @@ var HistoryPage = /** @class */ (function () {
                 // in case if we have no cards but just added one more
                 _this.initLoad();
             }
-        });
+        }, 100);
     };
     HistoryPage.prototype.loadMore = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -153,6 +157,7 @@ var HistoryPage = /** @class */ (function () {
                             .docs;
                         this.historySnapshot = docs ? (_a = this.historySnapshot).concat.apply(_a, docs) : null;
                         this.history = docs ? (_b = this.history).concat.apply(_b, docs.map(function (item) { return item.data(); })) : null;
+                        this.checkInitHeight();
                         _c.label = 2;
                     case 2: return [2 /*return*/];
                 }

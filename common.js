@@ -129,11 +129,10 @@ var HistoryService = /** @class */ (function () {
             .limit(limit); })
             .get();
     };
-    HistoryService.prototype.getHistorySub = function (limit) {
+    HistoryService.prototype.getHistorySub = function () {
         return this.db
             .collection(this.storageKey, function (ref) { return ref
-            .orderBy('date_removed', 'desc')
-            .limit(limit); })
+            .orderBy('date_removed', 'desc'); })
             .valueChanges();
     };
     HistoryService.prototype.getHistoryFromTo = function (startSnapshot, limit, includeFirst) {
@@ -181,10 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/firestore */ "./node_modules/@angular/fire/firestore/index.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user.service */ "./src/app/services/user.service.ts");
-
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user.service */ "./src/app/services/user.service.ts");
 
 
 
@@ -206,12 +202,24 @@ var QueuesService = /** @class */ (function () {
         });
     }
     QueuesService.prototype.deleteQueueItem = function (docId, snapshot) {
-        snapshot.ref.delete();
-        var queueRef = this.db.doc(docId);
-        var decrement = firebase_app__WEBPACK_IMPORTED_MODULE_3__["firestore"].FieldValue.increment(-1);
-        // decrement videoQueueLen
-        queueRef.update({
-            videoQueueLen: decrement
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var queueRef, size;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, snapshot.ref.delete()];
+                    case 1:
+                        _a.sent();
+                        queueRef = this.db.doc(docId);
+                        return [4 /*yield*/, queueRef.collection(this.storageCollectionKey).get().toPromise()];
+                    case 2:
+                        size = (_a.sent()).size;
+                        // update videoQueueLen
+                        queueRef.update({
+                            videoQueueLen: size
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     QueuesService.prototype.getQueues = function () {
@@ -255,7 +263,7 @@ var QueuesService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"],
             _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_2__["AngularFirestore"]])
     ], QueuesService);
     return QueuesService;
