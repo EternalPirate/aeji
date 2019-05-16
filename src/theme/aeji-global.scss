@@ -13,6 +13,10 @@
 app-queue-video {
 
   iframe {
-    height: calc(50vh - 145px);
+    height: calc(54vw);
+
+    @media ($screen-lg) {
+      height: calc(40vw);
+    }
   }
 }
