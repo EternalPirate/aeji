@@ -27,14 +27,14 @@ import { IRemoveQueueItemEvent } from '../../components/queue-video/queue-video.
 		trigger('items', [
 			// cubic-bezier for a tiny bouncing feel
 			transition(':enter', [
-				style({transform: 'scale(0.5)', opacity: 0}),
+				style({ transform: 'scale(0.5)', opacity: 0 }),
 				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
-					style({transform: 'scale(1)', opacity: 1}))
+					style({ transform: 'scale(1)', opacity: 1 }))
 			]),
 			transition(':leave', [
-				style({transform: 'scale(1)', opacity: 1, height: '*'}),
+				style({ transform: 'scale(1)', opacity: 1, height: '*' }),
 				animate('1s cubic-bezier(.8,-0.6,0.2,1.5)',
-					style({transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px'}))
+					style({ transform: 'scale(0.5)', opacity: 0, height: '0px', margin: '0px' }))
 			]),
 		])
 	]
@@ -44,11 +44,12 @@ export class QueuePage implements OnInit {
 		queueType: null,
 		videoQueueLen: null
 	};
-	limit = 2;
+	limit = 3;
 	queue: IQueueItem[];
 	queueSnapshot: QueryDocumentSnapshot<IQueueItem>[];
 	loading = true;
-	private cardsHeightIsChecked = false;
+	private checkHeightCount = 0;
+	private checkHeightCountLimit = 5;
 
 	constructor(
 		private queuesService: QueuesService,
@@ -74,8 +75,6 @@ export class QueuePage implements OnInit {
 					this.activeQueue = activeQueue;
 					this.checkInitHeight();
 				});
-
-			this.loading = false;
 		}
 	}
 
@@ -87,6 +86,7 @@ export class QueuePage implements OnInit {
 		// snapshot need for lazyloading and removing items
 		this.queueSnapshot = docs;
 		this.queue = docs.map(item => item.data());
+		this.loading = false;
 	}
 
 	async removeItem(e: IRemoveQueueItemEvent): Promise<void> {
@@ -94,7 +94,7 @@ export class QueuePage implements OnInit {
 		remEl.classList.add('on-removing');
 
 		const actionSheet = await this.actionSheetController.create({
-			header: 'Точно удалить?',
+			header: 'Are you sure?',
 			buttons: [{
 				text: 'Yes',
 				role: 'destructive',
@@ -123,13 +123,6 @@ export class QueuePage implements OnInit {
 		await actionSheet.present();
 	}
 
-	onLastVideoLoad(): void {
-		// onLastVideoLoad need to checkInitHeight
-		if (!this.cardsHeightIsChecked) {
-			this.checkInitHeight();
-		}
-	}
-
 	checkInitHeight(): void {
 		setTimeout(() => {
 			const cards = this.r.nativeElement.querySelector('#cards');
@@ -137,16 +130,15 @@ export class QueuePage implements OnInit {
 			if (cards) {
 				const wp = cards.closest('ion-content');
 
-				if (cards && cards.clientHeight < wp.clientHeight) {
+				if (cards && cards.clientHeight < wp.clientHeight && this.checkHeightCount <= this.checkHeightCountLimit) {
 					// if cards height less than screen we need to load more
 					this.loadMore();
-					this.cardsHeightIsChecked = true;
 				}
 			} else {
 				// in case if we have no cards but just added one more
 				this.initLoad();
 			}
-		});
+		}, 100);
 	}
 
 	async loadMore(): Promise<void> {
@@ -158,10 +150,9 @@ export class QueuePage implements OnInit {
 				.toPromise())
 				.docs;
 
-			if (docs.length > 0) {
-				this.queueSnapshot = this.queueSnapshot.concat(...docs);
-				this.queue = this.queue.concat(...docs.map(item => item.data()));
-			}
+			this.queueSnapshot = docs ? this.queueSnapshot.concat(...docs) : null;
+			this.queue = docs ? this.queue.concat(...docs.map(item => item.data())) : null;
+			this.checkInitHeight();
 		}
 	}
 

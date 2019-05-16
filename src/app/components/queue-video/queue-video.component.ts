@@ -14,19 +14,13 @@ export interface IRemoveQueueItemEvent {
 export class QueueVideoComponent implements OnInit {
 	@Input() queueItem: IQueueItem;
 	@Input() isHistory: boolean;
-	@Input() last: boolean;
 	@Input() index: number;
-	@Output() lastVideoLoad = new EventEmitter();
 	@Output() removeItem = new EventEmitter();
 
 	constructor() {
 	}
 
 	ngOnInit() {
-	}
-
-	onLastVideoLoad(): void {
-		this.lastVideoLoad.emit();
 	}
 
 	onRemoveItem(event: Event, index: number): void {

@@ -1,0 +1,18 @@
+@import "../theme/variables";
+
+.aeji {
+  &-input {
+    &-btn {
+      margin: 0 0 8px;
+      align-self: flex-end;
+      font-size: 16px;
+    }
+  }
+}
+
+app-queue-video {
+
+  iframe {
+    height: calc(50vh - 145px);
+  }
+}

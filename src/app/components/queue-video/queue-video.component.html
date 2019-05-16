@@ -1,4 +1,4 @@
-<ion-card #card>
+<ion-card>
   <iframe [src]="queueItem.url | safe: 'resourceUrl'"
           (load)="last ? onLastVideoLoad() : null"
           width="100%"

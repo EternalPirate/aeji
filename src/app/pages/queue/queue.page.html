@@ -7,7 +7,7 @@
         <ion-title *ngIf="activeQueue">
             {{ activeQueue.queueType }}
             Queue
-            <span *ngIf="activeQueue.videoQueueLen">({{ activeQueue.videoQueueLen }}шт.)</span>
+            <span *ngIf="activeQueue.videoQueueLen"> - {{ activeQueue.videoQueueLen }}</span>
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -19,12 +19,10 @@
             <div @list id="cards">
                 <app-queue-video
                         @items
-                        *ngFor="let queueItem of queue; let last = last; let index = index; trackBy: trackQueue"
+                        *ngFor="let queueItem of queue; let index = index; trackBy: trackQueue"
                         [queueItem]="queueItem"
-                        [last]="last"
                         [index]="index"
-                        (removeItem)="removeItem($event)"
-                        (lastVideoLoad)="onLastVideoLoad()">
+                        (removeItem)="removeItem($event)">
                 </app-queue-video>
             </div>
 

@@ -36,9 +36,12 @@ import { animate, animateChild, query, stagger, style, transition, trigger } fro
 })
 export class HistoryPage implements OnInit {
 	loading = true;
-	limit = 2;
+	limit = 3;
+	historyLen = 0;
 	history: IHistoryItem[];
 	historySnapshot: QueryDocumentSnapshot<IHistoryItem>[];
+	private checkHeightCount = 0;
+	private checkHeightCountLimit = 5;
 
 	constructor(
 		private historyService: HistoryService,
@@ -51,8 +54,9 @@ export class HistoryPage implements OnInit {
 
 
 		this.historyService
-			.getHistorySub(this.limit)
-			.subscribe((e: IHistoryItem[]) => {
+			.getHistorySub()
+			.subscribe((items: IHistoryItem[]) => {
+				this.historyLen = items.length;
 				this.checkInitHeight();
 			});
 	}
@@ -75,7 +79,7 @@ export class HistoryPage implements OnInit {
 			if (cards) {
 				const wp = cards.closest('ion-content');
 
-				if (cards && cards.clientHeight < wp.clientHeight) {
+				if (cards && cards.clientHeight < wp.clientHeight && this.checkHeightCount <= this.checkHeightCountLimit) {
 					// if cards height less than screen we need to load more
 					this.loadMore();
 				}
@@ -83,7 +87,7 @@ export class HistoryPage implements OnInit {
 				// in case if we have no cards but just added one more
 				this.initLoad();
 			}
-		});
+		}, 100);
 	}
 
 	async loadMore(): Promise<void> {
@@ -97,6 +101,7 @@ export class HistoryPage implements OnInit {
 
 			this.historySnapshot = docs ? this.historySnapshot.concat(...docs) : null;
 			this.history = docs ? this.history.concat(...docs.map(item => item.data())) : null;
+			this.checkInitHeight();
 		}
 	}
 

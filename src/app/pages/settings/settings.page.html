@@ -14,7 +14,7 @@
   <form [formGroup]="settings" (ngSubmit)="submit(settings)">
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Widget id of donationalerts</ion-label>
-      <ion-input formControlName="donationalertsId"></ion-input>
+      <ion-input formControlName="donationalertsId" type="password"></ion-input>
       <ion-button (click)="test(SettingsHelp.donationalerts)" slot="end" strong class="aeji-input-btn">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>

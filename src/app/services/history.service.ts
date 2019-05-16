@@ -44,11 +44,10 @@ export class HistoryService {
 			.get();
 	}
 
-	getHistorySub(limit: number): Observable<{}[]> {
+	getHistorySub(): Observable<{}[]> {
 		return this.db
 			.collection(this.storageKey, ref => ref
 				.orderBy('date_removed', 'desc')
-				.limit(limit)
 			)
 			.valueChanges();
 	}

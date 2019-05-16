@@ -18,8 +18,8 @@
               *ngFor="let item of queues; trackBy: trackQueue"
               [hidden]="item.videoQueueLen === 0"
               (click)="openQueue(item)">
-        <ion-label>{{ item.queueType }} Очередь</ion-label>
-        <ion-note slot="end">({{ item.videoQueueLen }}шт.)</ion-note>
+        <ion-label>{{ item.queueType }} Queue</ion-label>
+        <ion-note slot="end">{{ item.videoQueueLen }}</ion-note>
       </ion-item>
     </ion-list>
 

@@ -43,14 +43,15 @@ export class QueuesService {
 		});
 	}
 
-	deleteQueueItem(docId: string, snapshot: QueryDocumentSnapshot<IQueueItem>): void {
-		snapshot.ref.delete();
+	async deleteQueueItem(docId: string, snapshot: QueryDocumentSnapshot<IQueueItem>): Promise<void> {
+		await snapshot.ref.delete();
 
 		const queueRef = this.db.doc(docId);
-		const decrement = firebase.firestore.FieldValue.increment(-1);
-		// decrement videoQueueLen
+		const size = (await queueRef.collection(this.storageCollectionKey).get().toPromise()).size;
+
+		// update videoQueueLen
 		queueRef.update({
-			videoQueueLen: decrement
+			videoQueueLen: size
 		});
 	}
 

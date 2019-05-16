@@ -1,0 +1,25 @@
+ion-card {
+  --ion-color-step-600: #cbcbcb;
+  --ion-item-background: #353535;
+}
+
+.split-pane-visible>ion-menu.split-pane-side.menu-enabled {
+  max-width: 300px;
+  min-width: 300px;
+  width: 300px;
+}
+
+ion-card-title, ion-card-content, ion-card-subtitle {
+  --color: #cbcbcb;
+  color: var(--color);
+}
+
+
+.action-sheet-group {
+  --color: #cbcbcb;
+  --background: #353535;
+}
+
+.action-sheet-button.activated {
+  --background-activated: #545454;
+}
