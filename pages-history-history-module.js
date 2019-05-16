@@ -92,8 +92,6 @@ var HistoryPage = /** @class */ (function () {
         this.loading = true;
         this.limit = 3;
         this.historyLen = 0;
-        this.checkHeightCount = 0;
-        this.checkHeightCountLimit = 5;
     }
     HistoryPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -130,7 +128,7 @@ var HistoryPage = /** @class */ (function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
             if (cards) {
                 var wp = cards.closest('ion-content');
-                if (cards && cards.clientHeight < wp.clientHeight && _this.checkHeightCount <= _this.checkHeightCountLimit) {
+                if (cards && cards.clientHeight < wp.clientHeight) {
                     // if cards height less than screen we need to load more
                     _this.loadMore();
                 }
@@ -157,7 +155,6 @@ var HistoryPage = /** @class */ (function () {
                             .docs;
                         this.historySnapshot = docs ? (_a = this.historySnapshot).concat.apply(_a, docs) : null;
                         this.history = docs ? (_b = this.history).concat.apply(_b, docs.map(function (item) { return item.data(); })) : null;
-                        this.checkInitHeight();
                         _c.label = 2;
                     case 2: return [2 /*return*/];
                 }

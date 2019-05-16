@@ -111,8 +111,6 @@ var QueuePage = /** @class */ (function () {
         };
         this.limit = 3;
         this.loading = true;
-        this.checkHeightCount = 0;
-        this.checkHeightCountLimit = 5;
     }
     QueuePage.prototype.ngOnInit = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -200,7 +198,7 @@ var QueuePage = /** @class */ (function () {
             var cards = _this.r.nativeElement.querySelector('#cards');
             if (cards) {
                 var wp = cards.closest('ion-content');
-                if (cards && cards.clientHeight < wp.clientHeight && _this.checkHeightCount <= _this.checkHeightCountLimit) {
+                if (cards && cards.clientHeight < wp.clientHeight) {
                     // if cards height less than screen we need to load more
                     _this.loadMore();
                 }
@@ -227,7 +225,6 @@ var QueuePage = /** @class */ (function () {
                             .docs;
                         this.queueSnapshot = docs ? (_a = this.queueSnapshot).concat.apply(_a, docs) : null;
                         this.queue = docs ? (_b = this.queue).concat.apply(_b, docs.map(function (item) { return item.data(); })) : null;
-                        this.checkInitHeight();
                         _c.label = 2;
                     case 2: return [2 /*return*/];
                 }
