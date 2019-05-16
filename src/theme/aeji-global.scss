@@ -11,9 +11,12 @@
 }
 
 app-queue-video {
+  max-width: 1300px;
+  margin: 0 auto;
 
   iframe {
     height: calc(54vw);
+    max-height: 720px;
 
     @media ($screen-lg) {
       height: calc(40vw);
